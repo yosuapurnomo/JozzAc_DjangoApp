@@ -1,0 +1,47 @@
+{% load static %}
+
+<div class="modal fade" id="ModalFalse" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        	<form action="" method="post" autocomplete="off">
+        		{% csrf_token %}
+        		<div class="modal-header">
+	                <div class="modal-title" id="exampleModalLabel">
+	                	<h6 id='nama'></h6>
+	                    <h6 id='telp'></h6>
+	                    <h6 id='alamat'></h6>
+	                    <h6 id='kota'></h6>
+	                </div>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                    <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                <div class="card">
+	                    <div class="card-body">
+	                    	<h6>Tolak Pesanan</h6>
+	                        <form method="POST" id="form_tolak" name="form_tolak">
+	                        	<input type="hidden" name="slug" id="inputForm">
+	                        	<input type="submit" name="Tolak" class='btn btn-danger'>
+	                        	{# <button type="submit" > Tolak </button> #}
+	                        </form>
+	                        <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">
+	                        	Cancel
+	                        </button>
+	                        <br>
+	                        <div class="container">
+	                            <div class="row">
+	                                
+	                            </div>
+   
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>    	
+	        </form>
+            
+
+        </div>
+    </div>
+</div>

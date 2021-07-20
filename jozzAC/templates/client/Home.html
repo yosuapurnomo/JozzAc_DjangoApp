@@ -1,0 +1,216 @@
+{% extends "client/base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+{% endblock css %}
+{% block Content %}
+<div class="container-xxl">
+    
+    <!-- jumbotron -->
+    <section class="home">
+        
+        <div class="jumbotron" id="#home" style="background-image: url({% static "asset/bacground_1.jpg" %});">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <h1>Joz AC</h1>
+                        <p>Jadikan Tempat dimana anda berada terasa sejuk dan nyaman. karena kenyamanan akan membawa ketenangan.<br>Kami siap membantu anda dalam urusan Air conditioner, tak perlu memikirkan biaya yg mahal karena visi dan misi kami adalah
+                        kepuasan dan kenyamanan anda nomor 1.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- akhir jumbotron -->
+    <!-- About -->
+    <section class="about" id="about" style="background-image: url('{% static "asset/Layout_2.jpg" %}');">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <h2 class="text-center">About</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>CV. Jozz AC didirikan pada tanggal 9 september 2015 oleh Moch. Satrio. Perusahaan ini bergerak pada bidang Air Conditioner. Beliau selaku pemilik perusahaan terus mengembangkan perusahaannya sehingga pada tanggal 29-03-2018 perusahaan
+                        ini dipilih oleh penanggung jawab acara peresmian tol Ngawi-kertosono yang di hadiri oleh Bapak Ir. Joko Widodo selaku Presiden Republik Indonesia. Sejak saat itulah, kiprah <b> CV. Jozz AC</b> mulai dikenal oleh banyak orang serta
+                        dipercaya oleh beberapa orang untuk turut serta berpartisipasi pada setiap acara yang mereka adakan. Selain melayani persewaan AC pada acara-acara besar seperti Konser Indor/Outdoor, perusahaan ini juka melayani jasa sewa Genset,
+                        Servis AC rumah.</p>
+                    <p><b>Visi :</b> Menciptakan suasana yang nyaman dengan suhu yang sejuk pada segala medan.<br><b>Misi :</b> Menyediakan jasa dengan biaya yang amat sangat terjangkau dan pelayanan yang memuaskan.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- akhir about -->
+    
+    <!-- How To Order-->
+    <section class="HowToOrder" id="HowToOrder" style="background-image: url('{% static "asset/imagesBackGround.jpg" %}');">
+        <div class="container">
+            <div class="row justify-content-center pb-5">
+                <div class="col-md-12 text-center heading-section ftco-animate fadeInUp ftco-animated">
+                    <h2 class="mb-3 text-white">How To Order</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="timeline animate-box">
+                        <li class="animate-box ">
+                            <div class="timeline-badge">
+                                <h5>First</h5>
+                            </div>
+                            <div class="timeline-panel ftco-animate text-md-left fadeInUp ftco-animated">
+                                <div class="icon icon-left"><span class="flaticon-dove-1"></span></div>
+                                <div class="timeline-heading">
+                                    <h6 class="timeline-body">Scroll halaman kebawah, cari tombol <b>ORDER HERE</b>, klik tombol tersebut. anda otomatis akan diarahkan ke halaman pesanan.</h6>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="animate-box timeline-inverted">
+                            <div class="timeline-badge">
+                                <h5>Second</h5>
+                            </div>
+                            <div class="timeline-panel ftco-animate text-md-right fadeInUp ftco-animated">
+                                <div class="icon icon-right"><span class="flaticon-dove-1"></span></div>
+                                <div class="timeline-heading">
+                                    <h6 class="timeline-body">Pada halaman pesanan, silahkan anda isi data diri anda yang sesuai dengan KTP/SIM/KK yang masih berlaku. setelah itu, silahkan pilih produk yang ingin anda pesan.</h6>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="animate-box ">
+                            <div class="timeline-badge">
+                                <h5>Third</h5>
+                            </div>
+                            <div class="timeline-panel ftco-animate text-md-left fadeInUp ftco-animated">
+                                <div class="icon icon-left"><span class="flaticon-dove-1"></span></div>
+                                <div class="timeline-heading">
+                                    <h6 class="timeline-body">Setelaha semua dirasa benar, klik tombol pesan. lalu selesaikan transaksi sesuai dengan yang ada pada petunjuk yang anda lihat.</h6>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="animate-box timeline-inverted">
+                            <div class="timeline-badge">
+                                <h5>Fourth</h5>
+                            </div>
+                            <div class="timeline-panel ftco-animate text-md-right fadeInUp ftco-animated">
+                                <div class="icon icon-right"><span class="flaticon-dove-1"></span></div>
+                                <div class="timeline-heading">
+                                    <h6 class="timeline-body">Setelah semua proses yang ada pada tahap sebelumnya selesai anda lakukan, anda tinggal menunggu notifikasi dari kami saja. jika lebih dari 1 jam kami belum berikan norifikasi silahkan hubungi whatsapp kami yang ada
+                                        pada halaman awal ya.</h6>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- akhir How To Order -->
+    <!-- Product -->
+    <section class="product bg-ligth" id="Product">
+        <div class="row justify-content-center pb-1">
+            <div class="col-md-12 text-center heading-section ftco-animate fadeInUp ftco-animated">
+                <h2 class="mb-3 text-gray">Our Product</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="container mx-auto my-auto">
+            <div class="mx-auto my-auto">
+                <div class="cardProduk row row-cols-2 row-cols-md-3">
+                    
+                        {% for product in object %}
+                            <div class="mb-4">
+                            <div class="card border-warning" style="max-width: 18rem;">
+                                <div class="card-header">{{product.namaProduct}}</div>
+                                <div class="card-body text-warning">
+                                    <li>Keterangan :{{product.keteranganProduct|linebreaks}}</li>
+                                    <li>Harga Estimasi : Rp.{{product.hargaProduct|intcomma}}</li>
+                                    <li>*Product ini khusus untuk kawasan Surabaya</li>
+                                </div>
+                            </div>
+                                
+                            </div>
+                        {% endfor %}
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                <ul class="timeline animate-box">
+                    <li class="animate-box ">
+                        <div class="timeline-badge1">
+                            <div class="icon icon-right">
+                                <a href="https://api.whatsapp.com/send/?phone=6282333910886&text=Mau Order&app_absent=0" target="_blank"><img src="{% static "asset/Whatsaap.jpg" %}" alt="" style="
+                                height: 67px;
+                                width: 75px;
+                            "></a>
+                            </div>
+                        </div>
+                        <div class="timeline-panel1 ftco-animate text-md-left fadeInUp ftco-animated">
+                            <a href="">
+                                <div class="timeline-heading">
+                                    <h6 class="timeline-body">Jika anda memiliki peasanan yang tidak ada pada daftar harga atau pesanan dalam skala besar, jangan ragu untuk hubungi whatsapp kami ya..</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center pb-5">
+            <div class="col-md-12 text-center heading-section ftco-animate fadeInUp ftco-animated">
+                <a href="{% url "pesanan:AddOrder" %}" class="btn btn-warning font-weight-bold btn-lg">ORDER HERE</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Akhir Product -->
+    
+    <!-- Footer -->
+    <footer class="pt-5 pb-5 bt-1">
+        <div class="container mb-5">
+            <div class="pt-5 pb-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>
+                            <h2>Joz AC</h2>
+                            <h5 class="w-75">Jadikan Dunia anda lebih sejuk dan nyaman tanpa harus berat di Biaya bersama kami.</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div>
+                            <h4>Bantuan</h4>
+                            <nav class="nav flex-column">
+                                <a class="nav-link pl-0" href="#">Cara Order</a>
+                                <a class="nav-link pl-0" href="#">LProduct</a>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div>
+                            <h4>Explore</h4>
+                            <nav class="nav flex-column">
+                                <a class="nav-link pl-0" href="#">Contact Us</a>
+                                <a class="nav-link pl-0" href="#">About Us</a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-5 ">
+            <div class="text-center">
+                <p>&copy; 2021 - Joz AC - All right reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Akhir Footer -->
+</div>
+{% endblock Content %}

@@ -1,0 +1,80 @@
+{% extends "admin/base_admin.html" %}
+{% load static %}
+
+{% block Content %}
+<div class="container-fluid pr-auto pl-2">
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Update Pembayaran Untuk {{object.invoice}}</h1>
+    </div>
+
+    <form method="post" autocomplete="off">
+    	{% csrf_token %}
+      <div class="row">
+      	<div class="col-md-4 mb-3">
+          {{form.no_pembayaran.label_tag}}
+          {{form.no_pembayaran}}
+          <small id="id_no_Pembayaran" class="form-text text-muted">Kas Masuk Terakhir {{lastPayment}}</small>
+        </div>
+
+        <div class="col-sm-2 mb-3">
+            {{form.tgl_pembayaran.label_tag}}
+            {{form.tgl_pembayaran}}
+            {{form.tgl_pembayaran.error}}
+          </div>
+
+          <small class="form-text text-muted col-sm-7">
+          {{form.errors}}
+        </small>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 mb-3">
+            {{form.keterangan.label_tag}}
+            {{form.keterangan}}
+            {{form.keterangan.errors}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3 mb-3">
+            {{form.jumlah.label_tag}}
+            {{form.jumlah}}
+            {{form.jumlah.errors}}
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-danger buttonSubmit" data-toggle="modal" data-target="#exampleModal">
+          Delete
+        </button>
+        <a class="btn btn-success" href="{% url "pembayaran:cetak" slug=object.slug_pembayaran%}" target="_blank">Cetak</a>
+      </div>
+    </form>
+
+</div>
+
+{% endblock Content %}
+
+{% block Modal %}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{object.no_pembayaran}}</h5>
+        <button type="button" class="btn-close btn-outline-secondary" data-dismiss="modal" aria-label="Close">x</button>
+      </div>
+      <div class="modal-body">
+        <p>Invoice :{{object.invoice}}</p>
+        <p>Keterangan : {{object.keterangan|linebreaks}}</p>
+        <p>Tanggal Pembayaran : {{object.tgl_pembayaran}}</p>
+        <p>Jumlah : {{object.jumlah}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form method="post" action="{% url "pembayaran:delete" slug=object.slug_pembayaran%}">
+        	{% csrf_token %}
+        	<button type="submit" class="btn btn-primary">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock Modal %}

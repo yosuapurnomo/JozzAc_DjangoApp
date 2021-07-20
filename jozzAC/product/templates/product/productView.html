@@ -1,0 +1,37 @@
+{% extends "admin/base_admin.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block Css %}
+    <link rel="stylesheet" type="text/css" href="{% static "product/product.css" %}">
+{% endblock Css %}
+
+{% block Content %}
+<div class="container-fluid">
+	<div class="product">
+		<div class="row row-cols-2 row-cols-md-3 g-3">
+	{% for data in objects %}
+	{% if data.namaProduct != 'KHUSUS' %}
+		<div class="col-sm-6 mb-3">
+		    <div class="card h-100">
+		    	<div class="card-header">
+				    {{data.namaProduct}}
+				</div>
+		      <div class="card-body">
+		        <h5 class="card-title">{{data.keteranganProduct|linebreaks}}</h5>
+		        <h6 class="card-text">Harga Estimasi Rp.{{data.hargaProduct|intcomma}} /Unit</h6>
+		        
+		      </div>
+		        <div class="card-footer">
+			      <small class="text-muted"><a href="{% url "product:produkDetail" slug=data.slugProduct %}" class="btn btn-primary">Detail Product</a></small>
+			    </div>
+		    </div>
+	    
+	
+		 </div>
+	{% endif %}
+	{% endfor %}
+	</div>
+</div>
+	
+{% endblock Content %}

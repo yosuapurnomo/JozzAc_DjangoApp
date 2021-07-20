@@ -1,0 +1,80 @@
+{% extends "admin/base_admin.html" %}
+{% load static %}
+
+{% block Content %}
+<div class="container-fluid pr-auto pl-2">
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Update Surat Perintah Kerja Untuk {{object.pesanan}}</h1>
+    </div>
+
+    <form method="post" autocomplete="off">
+    	{% csrf_token %}
+    	{{form.pesanan}}
+    	<div class="col-md-4 mb-3">
+			{{form.no_SPK.label_tag}}
+			{{form.no_SPK}}
+			<small id="id_no_SPK" class="form-text text-muted">Nomor SPK Terakhir {{lastSPK}}</small>
+		</div>
+
+    	<div class="form-row">
+
+    		<div class="col-sm-2 mb-3 ml-2">
+    			{{form.teknisi.label_tag}}
+    			{{form.teknisi}}
+    			{{form.teknisi.error}}
+    		</div>
+    			
+    		<div class="col-sm-2 mb-2 ml-3">
+    			{{form.tgl_pengerjaan.label_tag}}
+    			{{form.tgl_pengerjaan}}
+    		</div>
+
+    		<div class="col-sm-2 mb-2 ml-3">
+	    		{{form.status.label_tag}}
+	    		{{form.status}}
+    		</div>
+    	</div>
+    	
+    	<div class="ml-2">
+    		{{form.keterangan.label_tag}}
+    		{{form.keterangan}}
+    	</div>
+
+    	{{form.errors}}
+    	
+
+    	<button type="submit" class="btn btn-primary my-4 ml-2">Update</button>
+    	<button type="button" class="btn btn-danger buttonSubmit" data-toggle="modal" data-target="#exampleModal">
+			   Delete
+		  </button>
+      <a class="btn btn-success" href="{% url "spk:cetakPDF" slug=object.slug_SPK%}" target="_blank">Cetak</a>
+    </form>
+
+</div>
+
+{% endblock Content %}
+
+{% block Modal %}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{object.no_SPK}}</h5>
+        <button type="button" class="btn-close btn-outline-secondary" data-dismiss="modal" aria-label="Close">x</button>
+      </div>
+      <div class="modal-body">
+        <p>Keterangan :{{object.keterangan|linebreaks}}</p>
+        <p>Teknisi : {{object.teknisi}}</p>
+        <p>Invoice : {{object.pesanan}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form method="post" action="{% url "spk:delete" slug=object.slug_SPK%}">
+        	{% csrf_token %}
+        	<button type="submit" class="btn btn-primary">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock Modal %}

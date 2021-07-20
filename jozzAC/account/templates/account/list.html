@@ -1,0 +1,31 @@
+{% extends "admin/base_admin.html" %}
+
+{% block Content %}
+	<div class="container-fluid mb-3">
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+	        <h1 class="h3 mb-0 text-gray-800">USER LIST</h1>
+	    </div>
+	    <table class="table table-hover table-dark">
+		  <thead>
+		    <tr>
+		      <th scope="col">USERNAME</th>
+		      <th scope="col">POSITION</th>
+		      <th scope="col">LAST LOGIN</th>
+		      <th scope="col"></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	{% for user in object %}
+		  		<tr>
+			      <th scope="row">{{user.username}}</th>
+			      <td>{{user.get_jabatan_display}}</td>
+			      <td>{{user.last_login}}</td>
+			      <td><a href="{% url "account:update" pk=user.id%}" class="btn btn-primary">Detail</a></td>
+			    </tr>
+		  	{% endfor %}
+		    
+		  </tbody>
+		</table>
+	</div>
+		
+{% endblock Content %}

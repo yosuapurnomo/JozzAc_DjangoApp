@@ -1,0 +1,35 @@
+{% extends "admin/base_admin.html" %}
+
+{% block Content %}
+	<div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Event Content</h1>
+        </div>
+
+        <div class="cardList mb-3 container">
+        	<div class="card-deck">
+        		<div class="row row-cols-md-4">
+        		{% for data in object %}
+				  	<div class="card col-md-4 bg-light border-secondary mb-3">
+				    <img src={{data.image.url}} class="card-img-top mt-2" alt={{data.images_Content}}>
+				    	<div class="card-body">
+				      		<h5 class="card-title">{{data.nama_Content}}</h5>
+					      	<p class="card-text">{{data.keterangan_Content}}</p>
+				    	</div>
+				    	<div class="card-footer inline-block">
+					      	<div class="card-text">
+					      		<small class="text-muted">Last updated {{data.tgl_upload}}</small>
+					      	</div>
+					      	<div class="text-right">
+					      		<a href="{% url "eventContent:update" slug=data.slug_Content%}" class="btn btn-primary">Detail</a>
+					      	</div>
+				    	</div>
+				  	</div>
+        		{% endfor %}
+        		</div>
+			</div>		
+        </div>
+    </div>
+{% endblock Content %}

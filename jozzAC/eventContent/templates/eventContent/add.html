@@ -1,0 +1,35 @@
+{% extends "admin/base_admin.html" %}
+
+{% block Content %}
+	<div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Event Content</h1>
+        </div>
+
+        <div class="formContent mb-3">
+        	<form method="post" autocomplete="off" enctype="multipart/form-data">
+        		{% csrf_token %}
+        		<div class="form-row ml-2">
+				    <div class="form-group col-md-3">
+				      	{{form.nama_Content.label}}
+        				{{form.nama_Content}}
+				    </div>
+				    <div class="form-group col-md-3">
+	        			<label for="id_image">Image</label>
+	        			{{form.image}}
+				    </div>
+				</div>
+				<div class="form-group col-md-5">
+					{{form.keterangan_Content.label}}
+	        		{{form.keterangan_Content}}
+				</div>
+        		{{form.admin}}
+        		<button type="submit" class="btn btn-primary ml-3">Sumbit</button>
+        	</form>
+        	{{form.errors}}
+        </div>
+        
+    </div>
+{% endblock Content %}
