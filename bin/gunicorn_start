@@ -1,0 +1,43 @@
+#! /bin/bash
+
+# Name of the application
+NAME="jozzAC"
+
+#Django project directory
+DJANGODIR=/root/JozzAc/jozzAC
+
+# we will communicte using this unix socket
+SOCKFILE=/root/JozzAc/run/gunicorn.sock
+
+#the user to run as
+USER=root
+
+#the group to run as
+GROUP=root
+
+NUM_WORKERS=3
+
+DJANGO_SETTINGS_MODULE=jozzAc.settings
+
+DJANGO_WSGI_MODULE=jozzAc.wsgi
+echo "Starting $NAME as `whoami`"
+
+
+cd $DJANGODIR
+source ../bin/activate
+
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+
+
+export PYTHONPATH=$DJANGODIR:$PYTHONPATH
+RUNDIR=$(dirname $SOCKFILE)
+test -d $RUNDIR || mkdir -p $RUNDIR
+
+exec ../bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+--name $NAME \
+--workers $NUM_WORKERS \
+--user=$USER --group=$GROUP \
+--bind=unix:$SOCKFILE \
+--log-level=debug \
+--log-file=-
+
