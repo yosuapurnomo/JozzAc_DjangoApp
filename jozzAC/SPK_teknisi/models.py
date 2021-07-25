@@ -32,7 +32,7 @@ class SPKModel(models.Model):
         verbose_name_plural='Surat Perintah Kerja'
 
     def save(self):
-        self.slug_SPK       = slugify(f"{self.no_SPK}")
+        self.slug_SPK       = slugify(f"{self.no_SPK} {self.teknisi}")
         super().save()
 
     def __str__(self):

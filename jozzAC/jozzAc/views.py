@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
+from datetime import date
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from product.models import ProductModel
 from client.models import ClientModel
+from pesanan.models import InvoiceModel
+from SPK_teknisi.models import SPKModel
 from eventContent.models import eventContentModel
-from django.db.models import Q
+from django.db.models import Q, Sum, Count
 
 class dasboardList(ListView):
 	model = ProductModel
@@ -30,6 +33,25 @@ class dasboardAdmin(LoginRequiredMixin, ListView):
 		if self.request.user.jabatan == 'TEKNISI':
 			return redirect('spk:teknisiSPK')
 		return super().get(request, kwargs)
+
+	def get_context_data(self, **kwargs):
+	    context = super().get_context_data(**kwargs)
+	    today = date.today()
+	    year = today.strftime("%Y")
+	    month = today.strftime("%m")
+	    context['month'] = today.strftime("%B %Y")
+	    context['pendapatan'] = InvoiceModel.objects.filter(tanggal__year__gte=year, tanggal__month__gte=month,
+	    													tanggal__year__lte=year, tanggal__month__lte=month).aggregate(Total=Sum('totalInvoice'))
+	    context['piutang'] = InvoiceModel.objects.filter(statusPembayaran='BELUM').aggregate(Total=Sum('totalInvoice'))
+	    jumlahSPK = SPKModel.objects.filter(tgl_input__year__gte=year, tgl_input__month__gte=month,
+	    													tgl_input__year__lte=year, tgl_input__month__lte=month).aggregate(Total=Count('no_SPK'))
+	    jumlahPending = SPKModel.objects.filter(tgl_input__year__gte=year, tgl_input__month__gte=month,
+	    													tgl_input__year__lte=year, tgl_input__month__lte=month,
+	    													status='PENDING').aggregate(Total=Count('no_SPK'))
+	    print(SPKModel.objects.all())
+	    context['OnProgress'] = round(jumlahPending['Total']/jumlahSPK['Total']*100)
+	    context['panding'] = self.model.objects.filter(clientApprov__isnull=True).exclude(InvoiceClient__isnull=False).aggregate(Total=Count('nama_Client'))
+	    return context
 
 class landingPage(TemplateView):
     template_name = "client/landingPage.html"

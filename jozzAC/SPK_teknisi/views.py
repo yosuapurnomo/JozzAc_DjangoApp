@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from django.db.models import Q, Count, Sum
 import socket
 from django import forms
 from django.urls import reverse_lazy, reverse
@@ -11,6 +12,7 @@ from .models import SPKModel
 from pesanan.models import InvoiceModel
 from account.models import Account
 from .forms import SPK_Form, SPK_Update_Status
+from datetime import datetime
 
 # Create your views here.
 class SPK_Create(LoginRequiredMixin, CreateView):
@@ -130,6 +132,37 @@ class cetakPDF(LoginRequiredMixin, View):
 		pisa_status = pisa.CreatePDF(
 		html, dest=response)
 		# if error then show some funy view
+		if pisa_status.err:
+			return HttpResponse('We had some errors <pre>' + html + '</pre>')
+		return response
+
+class cetakReport(LoginRequiredMixin, View):
+	login_url = reverse_lazy('account:login')
+	model = SPKModel
+	template_name = 'SPK_teknisi/Report.html'
+
+	def get(self, request, **kwargs):
+		if self.request.GET.get('first', False) != False:
+			data = self.model.objects.filter(tgl_input__range=[self.request.GET.get('first'), self.request.GET.get('last')])
+			first = datetime.strptime(self.request.GET.get('first'), "%Y-%m-%d")
+			last = datetime.strptime(self.request.GET.get('last'), "%Y-%m-%d")
+			context = {
+			'objects':data,'hostname' : request.META['HTTP_HOST'], 'first':datetime.strftime(first, "%d-%B-%Y"), 'last':datetime.strftime(last, "%d-%B-%Y")
+			}
+		else:
+			print(self.model.objects.all())
+			data = self.model.objects.all()
+			context = {
+			'objects':data,'hostname':request.META['HTTP_HOST']
+			}
+		response = HttpResponse(content_type='application/pdf')
+		response['Content-Disposition'] = "inline; filename='LAPORAN SPK'"
+
+		template = get_template(self.template_name)
+		html = template.render(context)
+
+		pisa_status = pisa.CreatePDF(html, dest=response)
+
 		if pisa_status.err:
 			return HttpResponse('We had some errors <pre>' + html + '</pre>')
 		return response

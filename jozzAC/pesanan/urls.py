@@ -3,7 +3,7 @@ from .views import (pesananKhusus,
 					Tracking, ClientOrder,
 					ApprovalView, InvoiceView,
 					InvoiceApprov, InvoiceDetail,
-					InvoiceDelete, cetakInvoice)
+					InvoiceDelete, cetakInvoice, cetakReportPendapatan, cetakReportPiutang, requestReport)
 
 app_name = 'pesanan'
 
@@ -18,6 +18,9 @@ urlpatterns = [
 	path('admin/invoice/detail/<slug:slug>', InvoiceDetail.as_view(), name='invoiceUpdate'),
 	path('admin/invoice/delete/<slug:slug>', InvoiceDelete.as_view(), name='invoiceDelete'),
 	path('admin/invoice/cetak/<slug:slug>', cetakInvoice.as_view(), name='createPDF'),
+	path('admin/pendapatan/cetak/', cetakReportPendapatan.as_view(), name='ReportPendapatan'),
+	path('admin/piutang/cetak/', cetakReportPiutang.as_view(), name='ReportPiutang'),
+	path('admin/request/cetak/', requestReport.as_view(), name='ReportRequest'),
 
 	# Client
 	path('add/', ClientOrder.as_view(), name='AddOrder'),

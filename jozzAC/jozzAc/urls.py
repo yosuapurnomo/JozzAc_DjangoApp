@@ -7,10 +7,10 @@ from .views import dasboardList, dasboardAdmin, landingPage
 
 urlpatterns = [
     # re_path(r'^admin/', admin.site.urls),
+    path('admin/', dasboardAdmin.as_view(), name='dasboardAdmin'),
     path('admin/', include('account.urls', namespace='account')),
     path('', dasboardList.as_view(), name='dasboard'),
     path('success/', landingPage.as_view(), name='landingPage'),
-    path('admin/dasboard/', dasboardAdmin.as_view(), name='dasboardAdmin'),
     path('product/', include('product.urls', namespace='product')),
     path('pesanan/', include('pesanan.urls', namespace='pesanan')),
     path('spk/', include('SPK_teknisi.urls', namespace='spk')),

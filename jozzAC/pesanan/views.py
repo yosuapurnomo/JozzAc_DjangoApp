@@ -1,5 +1,6 @@
 from django.shortcuts import redirect
 from django.http import HttpResponse
+from datetime import datetime
 
 from django.template.loader import get_template
 from xhtml2pdf import pisa
@@ -16,7 +17,7 @@ from client.models import ClientModel
 from product.models import ProductModel
 
 from account.models import Account
-from django.db.models import Q
+from django.db.models import Q, Count, Sum
 
 from .forms import InvoiceForm, JOForm
 from .forms import OrderFormSet
@@ -209,6 +210,93 @@ class cetakInvoice(LoginRequiredMixin, View):
 			return HttpResponse('We had some errors <pre>' + html + '</pre>')
 		return response
 
+class cetakReportPendapatan(LoginRequiredMixin, View):
+	login_url = reverse_lazy('account:login')
+	model = InvoiceModel
+	template_name = 'admin/ReportPendapatan.html'
+
+	def get(self, request, **kwargs):
+		if self.request.GET.get('first', False) != False:
+			objects = self.model.objects.filter(tanggal__range=[self.request.GET.get('first'), self.request.GET.get('last')])
+			Total = self.model.objects.filter(tanggal__range=[self.request.GET.get('first'), self.request.GET.get('last')]).aggregate(Total=Sum('totalInvoice'))
+			first = datetime.strptime(self.request.GET.get('first'), "%Y-%m-%d")
+			last = datetime.strptime(self.request.GET.get('last'), "%Y-%m-%d")
+			context = {
+			'objects':objects, 'Total':Total, 'hostname' : request.META['HTTP_HOST'], 'first':datetime.strftime(first, "%d-%B-%Y"), 'last':datetime.strftime(last, "%d-%B-%Y")
+			}
+		else:
+			objects = self.model.objects.all()
+			Total = self.model.objects.all().aggregate(Total=Sum('totalInvoice'))
+			context = {
+			'objects':objects, 'Total':Total, 'hostname' : request.META['HTTP_HOST']
+			}
+
+		response = HttpResponse(content_type='application/pdf')
+		response['Content-Disposition'] = f"inline; filename='LAPORAN PENDAPATAN'"
+
+		template = get_template(self.template_name)
+		html = template.render(context)
+
+		pisa_status = pisa.CreatePDF(html, dest=response)
+
+		if pisa_status.err:
+			return HttpResponse('We had some errors <pre>' + html + '</pre>')
+		return response
+		
+
+class cetakReportPiutang(LoginRequiredMixin, View):
+	login_url = reverse_lazy('account:login')
+	model = InvoiceModel
+	template_name = 'admin/ReportPiutang.html'
+
+	def get(self, request, **kwargs):
+		if self.request.GET.get('first', False) != False:
+			objects = self.model.objects.filter(tanggal__range=[self.request.GET.get('first'), self.request.GET.get('last')], statusPembayaran='BELUM')
+			Total = self.model.objects.filter(tanggal__range=[self.request.GET.get('first'), self.request.GET.get('last')], statusPembayaran='BELUM').aggregate(Total=Sum('totalInvoice'))
+			first = datetime.strptime(self.request.GET.get('first'), "%Y-%m-%d")
+			last = datetime.strptime(self.request.GET.get('last'), "%Y-%m-%d")
+			context = {
+			'objects':objects, 'Total':Total, 'hostname' : request.META['HTTP_HOST'], 'first':datetime.strftime(first, "%d-%B-%Y"), 'last':datetime.strftime(last, "%d-%B-%Y")
+			}
+		else:
+			objects = self.model.objects.filter(statusPembayaran='BELUM')
+			Total = self.model.objects.filter(statusPembayaran='BELUM').aggregate(Total=Sum('totalInvoice'))
+			context = {
+			'objects':objects, 'Total':Total, 'hostname' : request.META['HTTP_HOST']
+			}
+		response = HttpResponse(content_type='application/pdf')
+		response['Content-Disposition'] = f"inline; filename='LAPORAN PIUTANG'"
+
+		template = get_template(self.template_name)
+		html = template.render(context)
+
+		pisa_status = pisa.CreatePDF(html, dest=response)
+
+		if pisa_status.err:
+			return HttpResponse('We had some errors <pre>' + html + '</pre>')
+		return response
+
+class requestReport(LoginRequiredMixin, View):
+	login_url = reverse_lazy('account:login')
+	model = ClientModel
+	template_name = 'admin/requestReport.html'
+
+	def get(self, request, **kwargs):
+		objects = self.model.objects.filter(clientApprov__isnull=True).exclude(InvoiceClient__isnull=False)
+		context = {
+		'objects':objects, 'hostname' : request.META['HTTP_HOST'],
+		}
+		response = HttpResponse(content_type='application/pdf')
+		response['Content-Disposition'] = f"inline; filename='LAPORAN REQUEST CUSTOMER'"
+
+		template = get_template(self.template_name)
+		html = template.render(context)
+
+		pisa_status = pisa.CreatePDF(html, dest=response)
+
+		if pisa_status.err:
+			return HttpResponse('We had some errors <pre>' + html + '</pre>')
+		return response
 
 # CLient
 

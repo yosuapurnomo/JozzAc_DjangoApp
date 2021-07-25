@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '4(jpj6^ae=_@t=b_z(^=*w971_n^meqb*d)6zwh5oek9e%q7z8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,19 +43,19 @@ INSTALLED_APPS = [
     'channels',
 
     # Apps
+    'account',
     'client',
     'product',
     'pesanan',
     'SPK_teknisi',
     'pembayaran',
     'eventContent',
-    'account',
 ]
 
 AUTH_USER_MODEL = 'account.Account'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.AllowAllUsersModelBackend',
-    'account.backends.CaseInsensitiveModelBackend',
+    # 'account.backends.CaseInsensitiveModelBackend',
     )
 
 MIDDLEWARE = [
@@ -137,7 +137,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = '/root/jozzAc/static/'
+STATIC_ROOT = '/root/jozzAc/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 MEDIA_URL = '/media/'

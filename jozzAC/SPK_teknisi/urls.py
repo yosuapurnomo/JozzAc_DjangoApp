@@ -4,7 +4,7 @@ from .views import (SPK_Create,
 					SPK_Progress_List,
 					searchSPK,
 					SPK_Update,
-					list_SPK_teknisi, SPK_Delete, cetakPDF, SPK_UpdateStatus)
+					list_SPK_teknisi, SPK_Delete, cetakPDF, SPK_UpdateStatus, cetakReport)
 
 app_name = 'spk'
 
@@ -16,6 +16,8 @@ urlpatterns = [
 	path('admin/invocie_view/', SPK_InvoiceView.as_view(), name='invoiceView'),
 	path('admin/OnProgress/', SPK_Progress_List.as_view(), name='OnProgress'),
 	path('admin/list_spk/', searchSPK.as_view(), name='listSPK'),
+	path('admin/cetak/report', cetakReport.as_view(), name='cetakReport'),
+	
 	path('admin/teknisi_spk/', list_SPK_teknisi.as_view(), name='teknisiSPK'),
 	path('admin/teknisi_spk/<slug:slug>', SPK_UpdateStatus.as_view(), name='updateStatus'),
 ]

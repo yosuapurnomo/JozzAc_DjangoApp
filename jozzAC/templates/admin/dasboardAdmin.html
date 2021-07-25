@@ -1,18 +1,6 @@
 {% extends "admin/base_admin.html" %}
+{% load humanize %}
 
-{% block Css %}
-    <style type="text/css">
-        .cardJO{
-            overflow-x: scroll;
-            
-        }
-        .cardWidth{
-            min-width: 20rem;
-            min-height: 5rem;
-            max-height: 10rem;
-        }
-    </style>
-{% endblock Css %}
 
 {% block Content %}
 	<div class="container-fluid">
@@ -22,75 +10,171 @@
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                     </div>
 
-                    <!-- Content Form -->
-                    {% for client in pesanan %}
-                    <div class="card card{{client.Id}} mb-3">
-                        <div class="card-body px-0">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm w-25">
-                                        <h6>{{client.nama_Client}}</h6>
-                                        <h6>{{client.alamat_Client}} {{client.kota_Client}}</h6>
-                                        <h6>{{client.noTelp_Client}}</h6>
-                                    </div>
-                                    <div class="cardJO d-inline-flex">
-                                        {% for JO in client.clientJO.all %}
-                                    <div class="col-lg cardWidth">
-                                        <div class="card mr-2 mb-2">
-                                            <div class="card-body">
-                                                <h6>JO : {{JO.nomor_jo}}</h6>
-                                                {% if JO.keterangan != None %}
-                                                <h6>Product {{JO.product}} ({{JO.keterangan}})</h6>
-                                                {% else %}
-                                                <h6>Product {{JO.product}}</h6>
-                                                {% endif %}
-                                                <h6>Jumlah Ac = {{JO.jumlah_Ac}}</h6>
-                                            </div>
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="dropdown no-arrow ml-1">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-left shadow animated--fade-in pl-3"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Laporan Pendapatan</div>
+                                            <button type="button" class="d-none d-sm-inline-block btn btn-outline-primary shadow-sm mb-2" data-toggle="modal" data-target="#ModalReport" onclick="GenerateReport('pendapatan')"><i
+                                                class="fas fa-download fa-sm text-gray-50"></i> Generate Report</button>
+                                            <a href="{% url "pesanan:ReportPendapatan" %}" target="_blank" class="d-none d-sm-inline-block btn btn-outline-primary shadow-sm" ><i
+                                                class="fas fa-download fa-sm text-gray-50"></i> Generate Report All</a>
                                         </div>
                                     </div>
-                                        
-                                    {% endfor %}
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Pendapatan ({{month}})</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.{{pendapatan.Total|intcomma}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                           <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
                                     </div>
-                                    
-                                            <span style="color: #2AF314;">
-                                                <a href="{% url "pesanan:invoiceCreate" slug=client.slug_Client%}" class="text-decoration-none fas fa-check-circle fa-2x m-2" ></a>
-                                            </span>
-                                        <br>
-                                            <span style="color: #f80d04;">
-                                                <a class="fas fa-times-circle fa-2x m-2 btn-danger text-decoration-none" onclick="FalseButton('{{client.nama_Client}}', '{{client.alamat_Client}}', '{{client.kota_Client}}', '{{client.noTelp_Client}}', '{{client.slug_Client}}')" data-toggle="modal" data-target="#ModalFalse"></a>
-                                            </span>
-                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="dropdown no-arrow ml-1">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-left shadow animated--fade-in p-3"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Laporan Piutang</div>
+                                            <button class="d-none d-sm-inline-block btn btn-outline-success shadow-sm mb-2" data-toggle="modal" data-target="#ModalReport" onclick="GenerateReport('piutang')"><i
+                                                class="fas fa-download fa-sm text-gray-50"></i> Generate Report</button>
+                                            <a href="{% url "pesanan:ReportPiutang" %}" target="_blank" class="d-none d-sm-inline-block btn btn-outline-success shadow-sm" ><i
+                                                class="fas fa-download fa-sm text-gray-50"></i> Generate Report All</a>
+                                         </div>
+                                    </div>
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Piutang</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp.{{piutang.Total|intcomma}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="dropdown no-arrow ml-1">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-left shadow animated--fade-in p-3"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Laporan SPK</div>
+                                            <button type="button" class="d-none d-sm-inline-block btn btn-outline-info shadow-sm mb-2" data-toggle="modal" data-target="#ModalReport" onclick="GenerateReport('spk')"><i
+                                                class="fas fa-download fa-sm text-gray-50"></i> Generate Report</button>
+                                            <a href="{% url "spk:cetakReport" %}" target="_blank" class="d-none d-sm-inline-block btn btn-outline-info shadow-sm" ><i
+                                                class="fas fa-download fa-sm text-gray-50"></i> Generate Report All</a>
+                                        </div>
+                                    </div>
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">SPK On Progress
+                                            </div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{OnProgress}}%</div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="progress progress-sm mr-2">
+                                                        <div class="progress-bar bg-info" role="progressbar"
+                                                            style="width: {{OnProgress}}%" aria-valuenow="{{OnProgress}}" aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="dropdown no-arrow ml-1">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-left shadow animated--fade-in p-3"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Laporan Order Pending</div>
+                                            <a href="{% url "pesanan:ReportRequest" %}" target="_blank" class="d-none d-sm-inline-block btn btn-outline-warning shadow-sm"><i
+                                                class="fas fa-download fa-sm text-gray-50" ></i> Generate Report</a>
+                                        </div>
+                                    </div>
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Pending Requests</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{panding.Total}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
-                    <!-- /.container-fluid -->
+
+                    
                 </div>
 
 {% endblock Content %}
 
 {% block Modal %}
-    {% include "admin/include/modalApproval.html" %}
+    {% include "admin/include/modalReport.html" %}
 {% endblock Modal %}
 
 {% block javaScript %}
     <script type="text/javascript">
-    var loc = window.location;
-        function FalseButton(nama, alamat, kota, telp, slug) {
-
-            document.getElementById('nama').innerHTML = nama;
-            document.getElementById('alamat').innerHTML = alamat;
-            document.getElementById('kota').innerHTML = kota;
-            document.getElementById('telp').innerHTML = telp;
-            document.getElementById('inputForm').value = slug
+        function GenerateReport(key) {
+            if (key === 'pendapatan') {
+                document.getElementById("ModalReportTitle").innerHTML = "Generate Report Pendapatan"
+                document.getElementById("formReport").setAttribute('action', "{% url "pesanan:ReportPendapatan" %}")
+            }
+            else if(key === 'piutang'){
+                document.getElementById("ModalReportTitle").innerHTML = "Generate Report Piutang"
+                document.getElementById("formReport").setAttribute('action', "{% url "pesanan:ReportPiutang" %}")
+            }
+            else if(key === 'spk'){
+                document.getElementById("ModalReportTitle").innerHTML = "Generate Report SPK"
+                document.getElementById("formReport").setAttribute('action', "{% url "spk:cetakReport" %}")
+            }
         }
-
-    function changeURL(slug) {
-        var theURL = window.location.pathname;
-       return  theURL.replace(theURL, `${theURL}?data=${slug}`);
-        //Set URL
-
-    }
     </script>
 {% endblock javaScript %}
