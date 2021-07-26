@@ -12,12 +12,12 @@ listen   80;
 server_name ns.beonintermedia.com;
 client_max_body_size 4G;
 access_log /root/JozzAc/jozzAC/logs/nginx-access.log;
-error_log /home/ubuntu/hello_django/logs/nginx-error.log;
+error_log /root/JozzAc/jozzAC/logs/nginx-error.log;
 location /static/ {
-alias   /home/ubuntu/hello_django/static/;
+alias   /root/JozzAc/jozzAC/static/;
 }
 location /media/ {
-alias   /home/ubuntu/hello_django/media/;
+alias   /root/JozzAc/jozzAC/media/;
 }
 location / {
 # an HTTP header important enough to have its own Wikipedia entry:
@@ -41,13 +41,13 @@ proxy_redirect off;
 # Try to serve static files from nginx, no point in making an
 # *application* server like Unicorn/Rainbows! serve static files.
 if (!-f $request_filename) {
-proxy_pass http://hello_app_server;
+proxy_pass http://jozzac_app_server;
 break;
 }
 }
 # Error pages
 error_page 500 502 503 504 /500.html;
 location = /500.html {
-root /home/ubuntu/hello_django/static/;
+root /root/JozzAc/jozzAC/static/;
 }
 }
