@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/root/JozzAc
+ExecStart=/root/JozzAc/bin//gunicorn --access-logfile - --workers 3 --bind unix:/root/JozzAc/jozzAC/jozzAc.sock jozzAc.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
