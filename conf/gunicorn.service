@@ -6,7 +6,7 @@ After=network.target
 User=root
 Group=root
 WorkingDirectory=/root/JozzAc/jozzAC
-ExecStart=/root/JozzAc/bin//gunicorn --access-logfile - --workers 3 --bind unix:/root/JozzAc/jozzAC.sock jozzAc.wsgi:application
+ExecStart=/root/JozzAc/bin//gunicorn --access-logfile - --workers 3 --bind unix:/root/JozzAc/jozzAC/jozzAC.sock jozzAc.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
