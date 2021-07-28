@@ -12,6 +12,5 @@ server {
     location / {
         include proxy_params;
         uwsgi_pass unix://root/JozzAc/jozzAC/jozzAC.sock;
-        proxy_pass http://unix:/root/JozzAc/jozzAC/jozzAC.sock;
     }
 }
