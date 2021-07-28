@@ -7,7 +7,7 @@ NAME="jozzAC"
 DJANGODIR=/root/JozzAc/jozzAC
 
 # we will communicte using this unix socket
-SOCKFILE=/root/JozzAc/jozzAC/gunicorn.sock
+SOCKFILE=/root/JozzAc/jozzAC/jozzAC.sock
 
 #the user to run as
 USER=root
