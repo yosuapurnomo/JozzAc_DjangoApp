@@ -7,7 +7,7 @@ NAME="jozzAC"
 DJANGODIR=/root/JozzAc/jozzAC
 
 # we will communicte using this unix socket
-SOCKFILE=/root/JozzAc/jozzAC/run/gunicorn.sock
+SOCKFILE=/root/JozzAc/jozzAC/gunicorn.sock
 
 #the user to run as
 USER=root
@@ -31,7 +31,7 @@ export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 RUNDIR=$(dirname $SOCKFILE)
-test -d $RUNDIR || mkdir -p $RUNDIR
+test -d $RUNDIR
 
 exec ../bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
 --name $NAME \
