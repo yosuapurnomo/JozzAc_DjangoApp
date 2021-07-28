@@ -1,20 +1,12 @@
-upstream jozzAc_server {
-
-server unix:/root/JozzAc/jozzAC/jozzAC.sock fail_timeout=0;
-}
-
 server {
     listen 80;
     server_name jozacsurabaya.com;
 
-    client_max_body_size 4G;
-    access_log /root/JozzAc/jozzAC/logs/nginx-access.log;
-    error_log /root/JozzAc/jozzAC/logs/nginx-error.log;
-    location /static/ {
-        alias /root/JozzAc/jozzAC/static/;
+    location = /favicon.ico { access_log off; log_not_found off; }    location /static/ {
+        alias /root/JozzAc/jozzAC;
     }
     location /media/ {
-        alias /root/JozzAc/jozzAC/media/;
+        alias /root/JozzAc/jozzAC;
     }
 
     location / {
