@@ -48,7 +48,7 @@ class dasboardAdmin(LoginRequiredMixin, ListView):
 	    jumlahPending = SPKModel.objects.filter(tgl_input__year__gte=year, tgl_input__month__gte=month,
 	    													tgl_input__year__lte=year, tgl_input__month__lte=month,
 	    													status='PENDING').aggregate(Total=Count('no_SPK'))
-	    print(SPKModel.objects.all())
+	    
 	    context['OnProgress'] = round(jumlahPending['Total']/jumlahSPK['Total']*100)
 	    context['panding'] = self.model.objects.filter(clientApprov__isnull=True).exclude(InvoiceClient__isnull=False).aggregate(Total=Count('nama_Client'))
 	    return context
