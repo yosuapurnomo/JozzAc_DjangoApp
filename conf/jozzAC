@@ -6,9 +6,6 @@ server {
     location /static/ {
         root /root/JozzAc/jozzAC/staticfiles/;
     }
-    location /media/ {
-        root /root/JozzAc/jozzAC;
-    }
 
     location / {
         include proxy_params;
