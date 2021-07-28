@@ -1,0 +1,2 @@
+command = '/root/jozzAC/bin/gunicorn'
+py
