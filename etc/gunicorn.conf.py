@@ -1,4 +1,4 @@
 workers = 2
-errorlog = '/root/demo/JozzAC/jozzAc.gunicorn.error'
-accesslog = '/root/demo/JozzAC/jozzAc.gunicorn.access'
+errorlog = '/root/demo/jozzAc.gunicorn.error'
+accesslog = '/root/demo/jozzAc.gunicorn.access'
 loglevel = 'debug'
