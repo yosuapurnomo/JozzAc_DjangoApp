@@ -1,0 +1,9 @@
+[Unit]
+Description=Web server
+
+[Service]
+Type=forking
+User=root
+Group=root
+ExecStart=/usr/bin/nginx -c /root/demo/etc/nginx.conf
+ExecReload=/usr/bin/nginx -s reload
