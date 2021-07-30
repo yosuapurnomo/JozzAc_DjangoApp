@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2021/07/30 23:36:39 [error] 7455#7455: *1 open() "/root/demo/www/publiccgi-sys/defaultwebpage.cgi" failed (13: Permission denied), client: 114.125.126.137, server: jozacsurabaya.com, request: "GET /cgi-sys/defaultwebpage.cgi HTTP/1.1", host: "jozacsurabaya.com", referrer: "http://jozacsurabaya.com/"
 2021/07/30 23:36:39 [error] 7455#7455: *2 open() "/root/demo/www/publicfavicon.ico" failed (13: Permission denied), client: 114.125.126.137, server: jozacsurabaya.com, request: "GET /favicon.ico HTTP/1.1", host: "jozacsurabaya.com", referrer: "http://jozacsurabaya.com/"
 2021/07/30 23:36:39 [error] 7455#7455: *2 open() "/root/demo/www/publicfavicon.ico" failed (13: Permission denied), client: 114.125.126.137, server: jozacsurabaya.com, request: "GET /favicon.ico HTTP/1.1", host: "jozacsurabaya.com", referrer: "http://jozacsurabaya.com/cgi-sys/defaultwebpage.cgi"
@@ -301,3 +302,5 @@
 2021/07/31 03:34:23 [error] 11704#11704: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 182.1.70.116, server: jozac.admin.com, request: "GET /favicon.ico HTTP/1.1", upstream: "http://101.50.2.224:80/favicon.ico", host: "jozacsurabaya.com:9000", referrer: "http://jozacsurabaya.com:9000/"
 2021/07/31 03:34:49 [error] 11704#11704: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 182.1.70.116, server: jozac.admin.com, request: "GET / HTTP/1.1", upstream: "http://101.50.2.224:80/", host: "jozacsurabaya.com:9000"
 2021/07/31 03:34:49 [error] 11704#11704: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 182.1.70.116, server: jozac.admin.com, request: "GET /favicon.ico HTTP/1.1", upstream: "http://101.50.2.224:80/favicon.ico", host: "jozacsurabaya.com:9000", referrer: "http://jozacsurabaya.com:9000/"
+=======
+>>>>>>> 8ead63aa4c37ddb96d5c08484b4371211f9cd207

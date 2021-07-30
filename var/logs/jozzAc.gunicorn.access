@@ -965,3 +965,5 @@
 120.188.0.52 - - [31/Jul/2021:03:35:54 +0700] "GET /static/js/demo/chart-pie-demo.js HTTP/1.1" 500 0 "-" "-"
 120.188.0.52 - - [31/Jul/2021:03:36:02 +0700] "GET /static/vendor/fontawesome-free/css/all.min.css HTTP/1.1" 500 0 "-" "-"
 120.188.0.52 - - [31/Jul/2021:03:36:02 +0700] "GET /favicon.ico HTTP/1.1" 500 0 "-" "-"
+120.188.0.52 - - [31/Jul/2021:03:38:39 +0700] "GET /static/css/style.css HTTP/1.1" 500 0 "-" "-"
+120.188.0.52 - - [31/Jul/2021:03:38:39 +0700] "GET /favicon.ico HTTP/1.1" 500 0 "-" "-"
