@@ -5,6 +5,6 @@ Description=Web server
 Type=forking
 User=root
 Group=www-data
-ExecStart=/usr/bin/nginx -c /root/demo/etc/nginx.conf
-ExecReload=/usr/bin/nginx -s reload
+ExecStart=/usr/sbin/nginx -c /root/demo/etc/nginx.conf
+ExecReload=/usr/sbin/nginx -s reload
 
