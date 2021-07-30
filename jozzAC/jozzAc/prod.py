@@ -2,7 +2,7 @@ from .settings import *
 
 DEBUG = True
 
-STATIC_URL = '/prefix/'
+STATIC_URL = '/static/'
 
 
 ALLOWED_HOSTS = [
