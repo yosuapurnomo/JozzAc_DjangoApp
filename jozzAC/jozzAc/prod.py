@@ -2,7 +2,7 @@ from .settings import *
 
 DEBUG = False
 
-STATIC_URL = '/prefix/'
+STATIC_URL = '/root/demo/www/public/'
 
 STATIC_ROOT = '/root/demo/www/public'
 
