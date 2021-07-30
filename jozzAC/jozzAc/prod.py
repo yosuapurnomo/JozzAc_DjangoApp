@@ -5,7 +5,6 @@ DEBUG = False
 STATIC_URL = '/staitc/'
 
 
-
 ALLOWED_HOSTS = [
 	'jozacsurabaya.com', 'jozacsurabaya',
 	'jozacsurabaya.com:9001', '101.50.2.224:9001',
