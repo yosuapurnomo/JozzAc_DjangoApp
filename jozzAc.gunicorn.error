@@ -1,0 +1,292 @@
+[2021-07-30 23:52:42 +0700] [21097] [INFO] Worker exiting (pid: 21097)
+[2021-07-30 23:52:42 +0700] [21098] [INFO] Worker exiting (pid: 21098)
+[2021-07-30 23:52:42 +0700] [7862] [DEBUG] Current configuration:
+  config: /root/demo/etc/gunicorn.conf.py
+  wsgi_app: None
+  bind: ['127.0.0.1:8000']
+  backlog: 2048
+  workers: 2
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /root/demo/jozzAC
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /root/demo/jozzAc.gunicorn.access
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /root/demo/jozzAc.gunicorn.error
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: jozzAc.wsgi:application
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f23fe719d08>
+  on_reload: <function OnReload.on_reload at 0x7f23fe719e18>
+  when_ready: <function WhenReady.when_ready at 0x7f23fe719f28>
+  pre_fork: <function Prefork.pre_fork at 0x7f23fe71f0d0>
+  post_fork: <function Postfork.post_fork at 0x7f23fe71f1e0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f23fe71f2f0>
+  worker_int: <function WorkerInt.worker_int at 0x7f23fe71f400>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f23fe71f510>
+  pre_exec: <function PreExec.pre_exec at 0x7f23fe71f620>
+  pre_request: <function PreRequest.pre_request at 0x7f23fe71f730>
+  post_request: <function PostRequest.post_request at 0x7f23fe71f7b8>
+  child_exit: <function ChildExit.child_exit at 0x7f23fe71f8c8>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f23fe71f9d8>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f23fe71fae8>
+  on_exit: <function OnExit.on_exit at 0x7f23fe71fbf8>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2021-07-30 23:52:42 +0700] [7862] [INFO] Starting gunicorn 20.1.0
+[2021-07-30 23:52:42 +0700] [7862] [DEBUG] Arbiter booted
+[2021-07-30 23:52:42 +0700] [7862] [INFO] Listening at: http://127.0.0.1:8000 (7862)
+[2021-07-30 23:52:42 +0700] [7862] [INFO] Using worker: sync
+[2021-07-30 23:52:42 +0700] [7865] [INFO] Booting worker with pid: 7865
+[2021-07-30 23:52:42 +0700] [7866] [INFO] Booting worker with pid: 7866
+[2021-07-30 23:52:42 +0700] [7862] [DEBUG] 2 workers
+[2021-07-30 23:54:55 +0700] [7865] [INFO] Worker exiting (pid: 7865)
+[2021-07-30 23:54:55 +0700] [7862] [INFO] Handling signal: term
+[2021-07-30 23:54:55 +0700] [7866] [INFO] Worker exiting (pid: 7866)
+[2021-07-30 23:54:55 +0700] [7862] [WARNING] Worker with pid 7865 was terminated due to signal 15
+[2021-07-30 23:54:56 +0700] [7862] [INFO] Shutting down: Master
+[2021-07-30 23:54:56 +0700] [7924] [DEBUG] Current configuration:
+  config: /root/demo/etc/gunicorn.conf.py
+  wsgi_app: None
+  bind: ['127.0.0.1:8000']
+  backlog: 2048
+  workers: 2
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /root/demo/jozzAC
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /root/demo/jozzAc.gunicorn.access
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /root/demo/jozzAc.gunicorn.error
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: jozzAc.wsgi:application
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7fd2ccfe4d08>
+  on_reload: <function OnReload.on_reload at 0x7fd2ccfe4e18>
+  when_ready: <function WhenReady.when_ready at 0x7fd2ccfe4f28>
+  pre_fork: <function Prefork.pre_fork at 0x7fd2ccfea0d0>
+  post_fork: <function Postfork.post_fork at 0x7fd2ccfea1e0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fd2ccfea2f0>
+  worker_int: <function WorkerInt.worker_int at 0x7fd2ccfea400>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7fd2ccfea510>
+  pre_exec: <function PreExec.pre_exec at 0x7fd2ccfea620>
+  pre_request: <function PreRequest.pre_request at 0x7fd2ccfea730>
+  post_request: <function PostRequest.post_request at 0x7fd2ccfea7b8>
+  child_exit: <function ChildExit.child_exit at 0x7fd2ccfea8c8>
+  worker_exit: <function WorkerExit.worker_exit at 0x7fd2ccfea9d8>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fd2ccfeaae8>
+  on_exit: <function OnExit.on_exit at 0x7fd2ccfeabf8>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2021-07-30 23:54:56 +0700] [7924] [INFO] Starting gunicorn 20.1.0
+[2021-07-30 23:54:56 +0700] [7924] [DEBUG] Arbiter booted
+[2021-07-30 23:54:56 +0700] [7924] [INFO] Listening at: http://127.0.0.1:8000 (7924)
+[2021-07-30 23:54:56 +0700] [7924] [INFO] Using worker: sync
+[2021-07-30 23:54:56 +0700] [7927] [INFO] Booting worker with pid: 7927
+[2021-07-30 23:54:56 +0700] [7929] [INFO] Booting worker with pid: 7929
+[2021-07-30 23:54:56 +0700] [7924] [DEBUG] 2 workers
+[2021-07-31 00:05:05 +0700] [7927] [INFO] Worker exiting (pid: 7927)
+[2021-07-31 00:05:05 +0700] [7929] [INFO] Worker exiting (pid: 7929)
+[2021-07-31 00:05:05 +0700] [7924] [INFO] Handling signal: term
+[2021-07-31 00:05:05 +0700] [7924] [WARNING] Worker with pid 7929 was terminated due to signal 15
+[2021-07-31 00:05:05 +0700] [7924] [WARNING] Worker with pid 7927 was terminated due to signal 15
+[2021-07-31 00:05:06 +0700] [7924] [INFO] Shutting down: Master
+[2021-07-31 00:05:06 +0700] [8105] [DEBUG] Current configuration:
+  config: /root/demo/etc/gunicorn.conf.py
+  wsgi_app: None
+  bind: ['127.0.0.1:8000']
+  backlog: 2048
+  workers: 2
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 2
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /root/demo/jozzAC
+  daemon: False
+  raw_env: []
+  pidfile: None
+  worker_tmp_dir: None
+  user: 0
+  group: 0
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: /root/demo/jozzAc.gunicorn.access
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /root/demo/jozzAc.gunicorn.error
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: jozzAc.wsgi:application
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f8d0d89fd08>
+  on_reload: <function OnReload.on_reload at 0x7f8d0d89fe18>
+  when_ready: <function WhenReady.when_ready at 0x7f8d0d89ff28>
+  pre_fork: <function Prefork.pre_fork at 0x7f8d0d8a50d0>
+  post_fork: <function Postfork.post_fork at 0x7f8d0d8a51e0>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f8d0d8a52f0>
+  worker_int: <function WorkerInt.worker_int at 0x7f8d0d8a5400>
+  worker_abort: <function WorkerAbort.worker_abort at 0x7f8d0d8a5510>
+  pre_exec: <function PreExec.pre_exec at 0x7f8d0d8a5620>
+  pre_request: <function PreRequest.pre_request at 0x7f8d0d8a5730>
+  post_request: <function PostRequest.post_request at 0x7f8d0d8a57b8>
+  child_exit: <function ChildExit.child_exit at 0x7f8d0d8a58c8>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f8d0d8a59d8>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f8d0d8a5ae8>
+  on_exit: <function OnExit.on_exit at 0x7f8d0d8a5bf8>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2021-07-31 00:05:06 +0700] [8105] [INFO] Starting gunicorn 20.1.0
+[2021-07-31 00:05:06 +0700] [8105] [DEBUG] Arbiter booted
+[2021-07-31 00:05:06 +0700] [8105] [INFO] Listening at: http://127.0.0.1:8000 (8105)
+[2021-07-31 00:05:06 +0700] [8105] [INFO] Using worker: sync
+[2021-07-31 00:05:06 +0700] [8108] [INFO] Booting worker with pid: 8108
+[2021-07-31 00:05:06 +0700] [8109] [INFO] Booting worker with pid: 8109
+[2021-07-31 00:05:06 +0700] [8105] [DEBUG] 2 workers
