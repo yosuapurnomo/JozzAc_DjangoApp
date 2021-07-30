@@ -1,4 +1,6 @@
 workers = 2
-errorlog = '/root/demo/jozzAc.gunicorn.error'
-accesslog = '/root/demo/jozzAc.gunicorn.access'
+errorlog = '/root/demo/var/logs/jozzAc.gunicorn.error'
+accesslog = '/root/demo/var/logs/jozzAc.gunicorn.access'
 loglevel = 'debug'
+
+bind = ['101.50.2.224:9001']
