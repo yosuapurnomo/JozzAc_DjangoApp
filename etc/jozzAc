@@ -1,17 +1,22 @@
 server {
-    listen 9000;
-    server_name jozacsurabaya.com;
-
-    location = /favicon.ico { 
-    error_log /root/demo/var/logs/nginx.error.log warn;
-    access_log /root/demo/var/logs/nginx.access.log; 
-    }
-    location /static/ {
-            alias /root/demo/jozzAC/static/;
-        }
+    listen 80;
+    server_name www.jozacsurabaya.com; # customize with your domain name
 
     location / {
-        include proxy_params;
-        proxy_pass http://jozacsurabaya.com:9001
+        # django running in uWSGI
+        uwsgi_pass unix:///run/uwsgi/app/jozzAc/socket;
+        include uwsgi_params;
+        uwsgi_read_timeout 300s;
+        client_max_body_size 32m;
+    }
+
+    location /static/ {
+       # static files
+       alias /root/demo/www/public/static/; # ending slash is required
+    }
+
+    location /media/ {
+        # media files, uploaded by users
+        alias /root/demo/www/public/media/; # ending slash is required
     }
 }
