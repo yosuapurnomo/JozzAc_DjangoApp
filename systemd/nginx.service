@@ -7,4 +7,3 @@ User=root
 Group=root
 ExecStart=/usr/sbin/nginx -c /root/demo/etc/nginx.conf
 ExecReload=/usr/sbin/nginx -s reload
-
