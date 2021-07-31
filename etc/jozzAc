@@ -1,14 +1,17 @@
 server {
     listen 9000;
-    server_name jozac.admin.com;
+    server_name jozacsurabaya.com;
 
-    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /favicon.ico { 
+    error_log /root/demo/var/logs/nginx.error.log warn;
+    access_log /root/demo/var/logs/nginx.access.log; 
+    }
     location /static/ {
             alias /root/demo/jozzAC/static/;
         }
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/root/demo/var/sock/gunicorn.sock;
+        proxy_pass http://jozacsurabaya.com:9001
     }
 }
