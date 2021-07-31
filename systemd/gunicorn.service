@@ -10,7 +10,7 @@ WorkingDirectory=/root/demo/jozzAC
 ExecStart=/root/demo/virt/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
-          --bind unix:/root/demo/var/gunicorn.sock \
+          --bind unix:/root/demo/var/sock/gunicorn.sock \
           jozzAc.wsgi:application
 
 [Install]
