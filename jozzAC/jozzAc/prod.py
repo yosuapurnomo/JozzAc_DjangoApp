@@ -9,7 +9,7 @@ ALLOWED_HOSTS = [
 	'*'
 ]
 
-STATIC_ROOT = '/root/demo/www/public/static/'
+STATIC_ROOT = '/root/demo/jozzAC/static/'
 
 # '101.50.2.224:9000'
 # 'jozacsurabaya.com', 'jozacsurabaya',
