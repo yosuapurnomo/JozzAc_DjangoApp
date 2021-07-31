@@ -4,7 +4,7 @@ Description=Web server
 [Service]
 Type=simple
 User=root
-Group=root
+Group=www-data
 ExecStart=/usr/sbin/nginx -c /root/demo/etc/nginx.conf
 ExecReload=/usr/sbin/nginx -s reload
 
