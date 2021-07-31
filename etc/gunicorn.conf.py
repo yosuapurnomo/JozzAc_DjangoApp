@@ -1,4 +1,4 @@
-workers = 3
+workers = 2
 errorlog = '/root/demo/var/logs/jozzAc.gunicorn.error'
 accesslog = '/root/demo/var/logs/jozzAc.gunicorn.access'
 loglevel = "info"
