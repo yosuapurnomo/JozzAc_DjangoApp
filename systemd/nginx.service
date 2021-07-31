@@ -2,9 +2,9 @@
 Description=Web server
 
 [Service]
-Type=forking
+Type=simple
 User=root
-Group=www-data
+Group=root
 ExecStart=/usr/sbin/nginx -c /root/demo/etc/nginx.conf
 ExecReload=/usr/sbin/nginx -s reload
 
