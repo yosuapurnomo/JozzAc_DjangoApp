@@ -1,0 +1,14 @@
+server {
+    listen 80;
+    server_name jozac.admin.com;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+            alias /root/demo/www/public/static/;
+        }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/root/demo/var/sock/gunicorn.sock;
+    }
+}
