@@ -7,3 +7,6 @@ Group=root
 WorkingDirectory=/root/demo/jozzAC
 EnvironmentFile=/root/demo/etc/jozzAc.env
 ExecStart=/root/demo/virt/bin/gunicorn jozzAc.wsgi:application --config /root/demo/etc/gunicorn.conf.py
+
+[Install]
+WantedBy=multi-user.target
