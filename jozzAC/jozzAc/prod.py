@@ -7,8 +7,8 @@ ALLOWED_HOSTS = [
 	'www.jozacsurabaya.com', 'jozacsurabaya.com', 'jozacsurabaya'
 ]
 
-STATIC_ROOT = '/root/demo/www/public/static'
-MEDIA_ROOT = '/root/demo/www/public/media'
+STATIC_ROOT = '/home/static'
+MEDIA_ROOT = '/home/media'
 
 # '101.50.2.224:9000'
 # 'jozacsurabaya.com', 'jozacsurabaya',

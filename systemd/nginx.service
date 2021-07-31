@@ -4,7 +4,7 @@ Description=Web server
 [Service]
 Type=forking
 User=root
-Group=nobody
+Group=www-data
 ExecStart=/usr/sbin/nginx -c /root/demo/etc/nginx.conf
 ExecReload=/usr/sbin/nginx -s reload
 

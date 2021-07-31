@@ -12,11 +12,11 @@ server {
 
     location /static/ {
        # static files
-       alias /root/demo/www/public/static/; # ending slash is required
+       alias /home/static/; # ending slash is required
     }
 
     location /media/ {
         # media files, uploaded by users
-        alias /root/demo/www/public/media/; # ending slash is required
+        alias /home/media/; # ending slash is required
     }
 }
