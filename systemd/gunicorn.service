@@ -1,15 +1,14 @@
 [Unit]
 Description=gunicorn daemon
-Requires=gunicorn.socket
 After=network.target
 
 [Service]
-User=harry
+User=root
 Group=www-data
 WorkingDirectory=/home/demo/jozzAC
 ExecStart=/home/demo/virt/bin/gunicorn \
           --access-logfile - \
-          --workers 3 \
+          --workers 2 \
           --bind unix:/home/demo/var/sock/gunicorn.sock \
           jozzAc.wsgi:application
 
