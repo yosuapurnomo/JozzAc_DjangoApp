@@ -1,24 +1,21 @@
-upstream jozacsurabaya.com{
-    server unix:/home/demo/var/sock/gunicorn.sock;
-}
-
 server {
     listen 80;
-    server_name jozacsurabaya.com;
-    error_log /home/demo/var/logs/nginx.error.log warn;
-    access_log /home/demo/var/logs/nginx.access.log;
+    listen [::]:80;
+    server_name jozacsurabaya.com http://jozacsurabaya.com/ www.jozacsurabaya.com;
+    error_log /home/demo/var/logs/jozzAc.error.log warn;
+    access_log /home/demo/var/logs/jozzAc.access.log;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        alias /home/static/;
+        root /home/static/;
     }
 
     location /media/ {
-        alias /home/media/;
+        root /home/media/;
     }
 
     location / {
         include proxy_params;
-        proxy_pass http://jozacsurabaya.com/;
+        proxy_pass http://unix:/home/demo/var/sock/gunicorn.sock;
     }
 }
