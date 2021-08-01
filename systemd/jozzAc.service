@@ -6,7 +6,7 @@ User=root
 Group=www-data
 WorkingDirectory=/home/demo/jozzAC
 EnvironmentFile=/home/demo/etc/jozzAc.env
-ExecStart=/home/demo/virt/bin/gunicorn jozzAc.wsgi:application --config /home/demo/etc/gunicorn.conf.py
+ExecStart=/home/demo/virt/bin/gunicorn jozzAc.wsgi:application --config /home/demo/etc/gunicorn.conf.py --worker-connections 1000
 
 [Install]
 WantedBy=multi-user.target
