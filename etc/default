@@ -9,6 +9,12 @@ server {
     location /static/ {
         root /home/static/;
     }
+    location ~ \.css {
+        add_header  Content-Type    text/css;
+    }
+    location ~ \.js {
+        add_header  Content-Type    application/x-javascript;
+    }
 
     location /media/ {
         root /home/media/;
