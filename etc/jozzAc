@@ -1,5 +1,5 @@
-upstream jozacsurabaya{
-    server unix:/home/demo/var/sock/gunicorn.sock fail_timeout=0;
+upstream django{
+    server unix:/home/demo/var/sock/gunicorn.sock;
 }
 
 server {
@@ -14,14 +14,11 @@ server {
     }
 
     location /media/ {
-        root /home/static/;
+        root /home/media/;
     }
 
     location / {
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header Host $http_host;
-        proxy_redirect off;
         include proxy_params;
-        proxy_pass http://unix:/home/demo/var/sock/myproject.sock;
+        proxy_pass http://django/;
     }
 }
