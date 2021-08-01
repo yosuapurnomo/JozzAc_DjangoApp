@@ -22,32 +22,33 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static "css/sb-admin-2.min.css" %}" rel="stylesheet">
-    <link href="{% static "css/style_Form.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/style_Form.css" %}">
 
 </head>
 
 <body id="page-top">
-    {% include 'client/include/navbar.html' %}
+    {% include "client/include/navbar.html" %}
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- Content Wrapper -->
+                <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
+                
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <div class="container bg-warning my-2 p-2 service-form">
-                        <div class="header-form">
-                            <h1 class="h1 m-1 text-gray-800 text-center">Form Pemesanan</h1>
+                    <div class="container bg-warning my-2 py-2 service-form">
+                        <div class="header-form m-2">
+                            <h1 class="h1 text-gray-800 text-center">Form Pemesanan</h1>
                         </div>
                         <!-- list item -->
-                        <form method="post" autocomplete="off">
+                        <form method="post", autocomplete="off">
                             {% csrf_token %}
-                        <div class="card-item d-inline-flex m-3">
+                        <div class="list-product-dekstop">
+                            <div class="card-item d-sm-inline-flex mr-5">
                                 {% for produk in product %}
                                     {% if produk.slugProduct != 'khusus' %}
                                         <div class="card mx-2 p-2 mb-3">
@@ -56,23 +57,70 @@
                                             </div>
                                             <div class="card-body pl-1 pt-1">
                                                 <p>Harga Estimasi : Rp. {{produk.hargaProduct|intcomma}} /Unit</p>
-                                                <label for="{{produk.slugProduct}}Keterangan">Keterangan :</label>
-                                                <textarea name="{{produk.slugProduct}}Keterangan" id="{{produk.slugProduct}}Keterangan" cols="30" rows="5" class="form-control"></textarea>
-                                                <label for="Jumlah{{produk.id}}">Jumlah AC : </label>
-                                                <input type="number" class="form-control" id="Jumlah{{produk.id}}" name="{{produk.slugProduct}}Jumlah">
+
+                                                <label for="{{produk.slugProduct}}KeteranganDesktop">Keterangan :</label>
+                                                <textarea name="{{produk.slugProduct}}Keterangan" id="{{produk.slugProduct}}KeteranganDesktop" cols="30" rows="5" class="form-control"></textarea>
+
+                                                <label for="Jumlah{{produk.id}}Desktop">Jumlah AC : </label>
+                                                <input type="number" class="form-control" id="Jumlah{{produk.id}}Desktop" name="{{produk.slugProduct}}Jumlah">
+
                                                 <div class="form-group form-check">
-                                                    <input type="checkbox" class="form-check-input" id="Check{{produk.id}}" name="{{produk.slugProduct}}" onclick="clickCheck(Jumlah{{produk.id}}, Check{{produk.id}})">
-                                                    <label class="form-check-label" for="Check{{produk.id}}">Klik untuk Memesan Product</label>
+                                                    <input type="checkbox" class="form-check-input" id="Check{{produk.id}}Desktop" name="{{produk.slugProduct}}" onclick="clickCheckDekstop(Jumlah{{produk.id}}Desktop, Check{{produk.id}}Desktop, Check{{produk.id}}Phone)">
+                                                    <label class="form-check-label" for="Check{{produk.id}}Desktop">Klik untuk Memesan Product</label>
                                                 </div>
                                                 <small class="text-muted">* Harga tersebut bisa berubah
                                                 sewaktu-waktu sesuai kondisi</small>
                                             </div>
                                         </div>
                                     {% endif %}
-                                    
                                 {% endfor %}
+                                
+                            </div>
+                        </div>
+
+                        <div class="list-product-phone  mx-auto">
                             
-                            
+                            <div class="container">
+                                <div class="row">
+                                    {% for produk in product %}
+                                        {% if produk.slugProduct != 'khusus' %}
+                                            <div class="col-6 mb-2">
+                                                <a class="btn btn-light mx-1" data-toggle="collapse" href="#collapse{{produk.slugProduct}}" role="button" aria-expanded="false" aria-controls="collapse{{produk.slugProduct}}">
+                                                    {{produk.namaProduct}}
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            {% for produk in product %}
+                                {% if produk.slugProduct != 'khusus' %}
+                                    <div class="collapse" id="collapse{{produk.slugProduct}}">
+                                            <div class="card-form m-3 bg-light">
+                                                <div class="card-title">
+                                                    <p>Nama Product : {{produk.namaProduct}}</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p>Harga Estimasi : Rp. {{produk.hargaProduct|intcomma}} /Unit</p>
+
+                                                    <label for="{{produk.slugProduct}}KeteranganPhone">Keterangan :</label>
+                                                    <textarea name="{{produk.slugProduct}}Keterangan" id="{{produk.slugProduct}}KeteranganPhone" cols="30" class="form-control"></textarea>
+                                                    
+                                                    <label for="Jumlah{{produk.id}}Phone">Jumlah AC : </label>
+                                                    <input type="number" class="form-control" id="Jumlah{{produk.id}}Phone" name="{{produk.slugProduct}}Jumlah" cols="25">
+
+                                                    <div class="form-group form-check">
+                                                        <input type="checkbox" class="form-check-input" id="Check{{produk.id}}Phone" name="{{produk.slugProduct}}" onclick="clickCheckPhone(Jumlah{{produk.id}}Phone, Check{{produk.id}}Phone, Check{{produk.id}}Desktop)">
+                                                        <label class="form-check-label" for="Check{{produk.id}}Phone">Klik untuk Memesan Product</label>
+                                                    </div>
+                                                    <small class="text-muted">* Harga tersebut bisa berubah
+                                                    sewaktu-waktu sesuai kondisi</small>
+                                                </div>
+                                            </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
 
                         <!-- Content Form -->
@@ -103,18 +151,11 @@
                                         <input name="kota_Client" type="text" class="form-control" id="inputKota" aria-describedby="emailHelp" required> 
                                     </div>
                                 </div>
+                            </form>
                                 <button type="submit" class="btn btn-dark mt-3">Pesan</button>
-                            </form>
                         </div>
-                            </form>
-                            
+                        </form>
                     </div>
-
-                    
-                    
-                    
-
-                    <!-- /.container-fluid -->
 
                 </div>
 
@@ -122,7 +163,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
+                            <span>Copyright &copy; Your Website 2020</span>
                         </div>
                     </div>
                 </footer>
@@ -133,7 +174,6 @@
 
         </div>
         <!-- End of Page Wrapper -->
-
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
@@ -156,9 +196,18 @@
         <script src="{% static "js/demo/chart-area-demo.js" %}"></script>
         <script src="{% static "js/demo/chart-pie-demo.js" %}"></script>
         <script type="text/javascript">
-            function clickCheck(jumlah, check){
-                
+            function clickCheckDekstop(jumlah, check, checkPhone){
                 if (check.checked == true) {
+                    checkPhone.checked = false
+                    jumlah.required = true;
+                }
+                else{
+                    jumlah.required = false;
+                }
+            }
+            function clickCheckPhone(jumlah, check, checkDesktop){
+                if (check.checked == true) {
+                    checkDesktop.checked = false
                     jumlah.required = true;
                 }
                 else{
@@ -166,6 +215,8 @@
                 }
             }
         </script>
+
 </body>
 
 </html>
+

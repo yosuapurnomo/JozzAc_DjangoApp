@@ -40,16 +40,24 @@ class dasboardAdmin(LoginRequiredMixin, ListView):
 	    year = today.strftime("%Y")
 	    month = today.strftime("%m")
 	    context['month'] = today.strftime("%B %Y")
-	    context['pendapatan'] = InvoiceModel.objects.filter(tanggal__year__gte=year, tanggal__month__gte=month,
+	    pendapatan = InvoiceModel.objects.filter(tanggal__year__gte=year, tanggal__month__gte=month,
 	    													tanggal__year__lte=year, tanggal__month__lte=month).aggregate(Total=Sum('totalInvoice'))
+	    
+	    if pendapatan['Total'] is None:
+	    	context['pendapatan'] = {'Total':0}
+	    else:
+	    	context['pendapatan'] = pendapatan
 	    context['piutang'] = InvoiceModel.objects.filter(statusPembayaran='BELUM').aggregate(Total=Sum('totalInvoice'))
 	    jumlahSPK = SPKModel.objects.filter(tgl_input__year__gte=year, tgl_input__month__gte=month,
 	    													tgl_input__year__lte=year, tgl_input__month__lte=month).aggregate(Total=Count('no_SPK'))
 	    jumlahPending = SPKModel.objects.filter(tgl_input__year__gte=year, tgl_input__month__gte=month,
 	    													tgl_input__year__lte=year, tgl_input__month__lte=month,
 	    													status='PENDING').aggregate(Total=Count('no_SPK'))
+	    print(jumlahPending['Total'], jumlahSPK['Total'])
+	    if jumlahPending['Total'] > 0:
+	    	context['OnProgress'] = round(jumlahPending['Total']/jumlahSPK['Total']*100)
+	    else: context['OnProgress'] = 0
 	    
-	    context['OnProgress'] = round(jumlahPending['Total']/jumlahSPK['Total']*100)
 	    context['panding'] = self.model.objects.filter(clientApprov__isnull=True).exclude(InvoiceClient__isnull=False).aggregate(Total=Count('nama_Client'))
 	    return context
 
