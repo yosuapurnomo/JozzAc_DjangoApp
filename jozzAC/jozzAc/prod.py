@@ -9,7 +9,7 @@ ALLOWED_HOSTS = [
 
 STATIC_ROOT = '/home/static/'
 MEDIA_ROOT = '/home/media/'
-STATICFILES_DIRS = '/home/media/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),'/home/static/']
 
 # '101.50.2.224:9000'
 # 'jozacsurabaya.com', 'jozacsurabaya',
