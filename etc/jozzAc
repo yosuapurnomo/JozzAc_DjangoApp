@@ -1,4 +1,4 @@
-upstream django{
+upstream jozacsurabaya.com{
     server unix:/home/demo/var/sock/gunicorn.sock;
 }
 
@@ -10,15 +10,15 @@ server {
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /home/static/;
+        alias /home/static/;
     }
 
     location /media/ {
-        root /home/media/;
+        alias /home/media/;
     }
 
     location / {
         include proxy_params;
-        proxy_pass http://django/;
+        proxy_pass http://jozacsurabaya.com/;
     }
 }
