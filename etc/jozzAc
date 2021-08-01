@@ -12,7 +12,6 @@ server {
     }
 
     location / {
-        include proxy_params;
-        proxy_pass http://unix:/root/demo/var/sock/gunicorn.sock;
+        proxy_pass http://jozacsurabaya.com;
     }
 }
