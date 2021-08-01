@@ -1,3 +1,7 @@
+upstream jozacsurabaya{
+    server unix:/root/demo/var/sock/gunicorn.sock fail_timeout=0;
+}
+
 server {
     listen 80;
     server_name jozacsurabaya.com;
