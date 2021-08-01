@@ -4,7 +4,8 @@ DEBUG = False
 
 
 ALLOWED_HOSTS = [
-	'*', 'http://jozacsurabaya.com:8000/', '101.50.2.224:8000'
+	'*', 'http://jozacsurabaya.com:8000/', '101.50.2.224:8000',
+	'jozacsurabaya.com', 'jozacsurabaya'
 ]
 
 STATIC_ROOT = '/home/static/'
