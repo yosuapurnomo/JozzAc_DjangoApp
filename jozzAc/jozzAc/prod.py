@@ -1,4 +1,5 @@
 from .settings import *
+import os
 
 DEBUG = False
 
@@ -8,8 +9,8 @@ ALLOWED_HOSTS = [
 	'jozacsurabaya.com', 'jozacsurabaya'
 ]
 
-STATIC_ROOT = '/home/static/'
-MEDIA_ROOT = '/home/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 # '101.50.2.224:9000'
