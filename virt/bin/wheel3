@@ -1,4 +1,4 @@
-#!/home/JozzAc/virt/bin/python
+#!/home/jozzAc/virt/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
