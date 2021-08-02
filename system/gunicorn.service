@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 User=root
-Group=root
+Group=www-data
 WorkingDirectory=/home/jozzAc/jozzAc
 ExecStart=/home/jozzAc/virt/bin/gunicorn --access-logfile - --workers 1 --bind unix:/home/jozzAc/jozzAc/jozzAc.sock jozzAc.wsgi:application
 
