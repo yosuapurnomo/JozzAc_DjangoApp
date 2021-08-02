@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=sammy
+Group=www-data
+WorkingDirectory=/home/jozzAc/jozzAc
+ExecStart=/home/jozzAc/virt/bin/gunicorn --access-logfile - --workers 1 --bind unix:/home/jozzAc/jozzAc/jozzAc.sock jozzAc.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
