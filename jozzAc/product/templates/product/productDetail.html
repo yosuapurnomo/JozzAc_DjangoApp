@@ -1,0 +1,57 @@
+{% extends "admin/base_admin.html" %}
+{% load humanize %}
+{% load static %}
+
+{% block Css %}
+	<link rel="stylesheet" type="text/css" href="{% static "product/detail.css" %}">
+{% endblock Css %}
+
+{% block Content %}
+	<div class="container-fluid">
+		<h1>Product - {{object.namaProduct}}</h1>
+		<div class="formProduct">
+			<form method="post" autocomplete="off">
+				{% csrf_token %}
+				{{form.errors}}
+				{{form.namaProduct.label}}
+				{{form.namaProduct}}
+				{{form.keteranganProduct.label}}
+				{{form.keteranganProduct}}
+				{{form.hargaProduct.label}}
+				{{form.hargaProduct}}
+				<button type="submit" class="btn btn-primary buttonSubmit">Update</button>
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-danger buttonSubmit" data-toggle="modal" data-target="#exampleModal">
+				  Delete
+				</button>
+			</form>
+		</div>
+		    
+	</div>
+
+
+{% endblock Content %}
+
+{% block Modal %}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Product {{object.namaProduct}}</h5>
+        <button type="button" class="btn-close btn-outline-secondary" data-dismiss="modal" aria-label="Close">x</button>
+      </div>
+      <div class="modal-body">
+        <p>Keterangan :{{object.keteranganProduct|linebreaks}}</p>
+        <p>Harga Estimasi : Rp. {{object.hargaProduct|intcomma}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form method="post" action="{% url "product:produkDelete" slug=object.slugProduct%}">
+        	{% csrf_token %}
+        	<button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock Modal %}

@@ -1,0 +1,80 @@
+{% extends "admin/base_admin.html" %}
+{% load humanize %}
+
+{% block Content %}
+	<div class="container-fluid">
+		<div class=" d-sm-flex align-items-center justify-content-between mb-4">
+        	<h1 class="h3 mb-0 text-gray-800">INVOICE {{object.Invoice}}</h1>
+    	</div>
+
+    	<div>
+    		<form method="POST" autocomplete="off">
+        	{% csrf_token %}
+				<div class="form-row">
+				    <div class="form-group col-md-6">
+				      <label for="id_Invoice">INVOICE</label>
+				      {{form.Invoice}}
+				      
+				    </div>
+				    <div class="form-group col-md-6">
+				      <label>Invoice Terakhir {{last_invoice.Invoice}}</label>
+				      
+				    </div>
+				</div>
+
+				<div class="form-group">
+					<input type="hidden" name="clientINV" value="{{client}}">
+					<label for="inputKeterangan">Keterangan</label>
+					{{form.Keterangan}}
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-2">
+						<label for="inputTotal">Total</label>
+						{{form.totalInvoice}}
+					</div>
+					<div class="form-group col-md-2">
+						<label for="id_statusPembayaran">Status Pembayaran</label>
+						<select id="id_statusPembayaran" class="form-control" name="statusPembayaran">
+					     
+					        <option value="BELUM">BELUM LUNAS</option>
+					        <option value="LUNAS">LUNAS</option>
+					    </select>
+					</div>
+				</div>
+				<p>{{form.errors}}</p>
+
+			  	<button type="submit" class="btn btn-primary">Update</button>
+			  	<button type="button" class="btn btn-danger buttonSubmit" data-toggle="modal" data-target="#exampleModal">
+				  	Delete
+					</button>
+					<a class="btn btn-success" href="{% url "pesanan:createPDF" slug=object.slug_Invoice%}" target="_blank">Cetak</a>
+        </form>
+    	</div>
+
+    </div>
+{% endblock Content %}
+
+{% block Modal %}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Invoice : {{object.Invoice}}</h5>
+        <button type="button" class="btn-close btn-outline-secondary" data-dismiss="modal" aria-label="Close">x</button>
+      </div>
+      <div class="modal-body">
+        <p>Keterangan :{{object.Keterangan|linebreaks}}</p>
+        <p>Total Invoice : Rp. {{object.totalInvoice|intcomma}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form method="post" action="{% url "pesanan:invoiceDelete" slug=object.slug_Invoice%}">
+        	{% csrf_token %}
+        	<button type="submit" class="btn btn-primary">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock Modal %}

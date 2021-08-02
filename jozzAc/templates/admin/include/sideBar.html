@@ -1,0 +1,163 @@
+{% load static %}
+
+<!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url "dasboard" %}">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Joz AC </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url "dasboardAdmin" %}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+            {% if request.user.jabatan == 'ADMIN' %}
+                <!-- Nav Item - Pemesanan -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>PRODUCT</span>
+                    </a>
+                    <div id="collapseProduct" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">PRODUCT</h6>
+                            <a class="collapse-item" href="{% url "product:produkCreate" %}">ADD</a>
+                            <a class="collapse-item" href="{% url "product:produkView" %}">LIST</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrder"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>ORDER</span>
+                    </a>
+                    <div id="collapseOrder" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">ORDER</h6>
+                            <a class="collapse-item" href="{% url "pesanan:add_khusus" %}">ADD SPESIAL ORDER</a>
+                            <a class="collapse-item" href="{% url "pesanan:approval" %}">APPROVEL ORDER</a>
+                            <a class="collapse-item" href="{% url "pesanan:tracking" %}">TRACKING</a>
+                            <a class="collapse-item" href="{% url "pesanan:invoiceView" %}">INVOICE</a>
+                        </div>
+                    </div>
+                </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSPK"
+                            aria-expanded="true" aria-controls="collapseSPK">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>SPK</span>
+                        </a>
+                        <div id="collapseSPK" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">SPK</h6>
+                                <a class="collapse-item" href="{% url "spk:invoiceView" %}">INVOICE TANPA SPK</a>
+                                <a class="collapse-item" href="{% url "spk:listSPK" %}">CARI SPK</a>
+                                <a class="collapse-item" href="{% url "spk:OnProgress" %}">SPK ON PROGRESS</a>
+                            </div>
+                        </div>
+                    </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePayment"
+                        aria-expanded="true" aria-controls="collapsePayment">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>PEMBAYARAN</span>
+                    </a>
+                    <div id="collapsePayment" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">SPK</h6>
+                            <a class="collapse-item" href="{% url "pembayaran:list" %}">LIST</a>
+                            <a class="collapse-item" href="{% url "pembayaran:search" %}">CARI PEMBAYARAN</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Content -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-ticket-alt"></i>
+                        <span>Content</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Event Content</h6>
+                            <a class="collapse-item" href="{% url "eventContent:list" %}">LIST</a>
+                            <a class="collapse-item" href="{% url "eventContent:add" %}">ADD</a>
+                            
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Employee -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-users"></i>
+                        <span>Pegawai</span>
+                    </a>
+                    <div id="collapseEmployee" class="collapse" aria-labelledby="headingTwo"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Pegawai</h6>
+                            <a class="collapse-item" href="{% url "account:create" %}">ADD</a>
+                            <a class="collapse-item" href="{% url "account:list" %}">LIST</a>                            
+                        </div>
+                    </div>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSPK"
+                        aria-expanded="true" aria-controls="collapseSPK">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>SPK</span>
+                    </a>
+                    <div id="collapseSPK" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">SPK</h6>
+                            <a class="collapse-item" href="{% url "spk:teknisiSPK" %}">LIST SPK</a>
+                        </div>
+                    </div>
+                </li>
+            {% endif %}
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+            <!-- Sidebar Message -->
+            {# <div class="sidebar-card"> #}
+                {# <img class="sidebar-card-illustration mb-2" src="{% static "img/undraw_rocket.svg" %}" alt=""> #}
+                {# <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, #}
+                    {# and more!</p> #}
+                {# <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to #}
+                    {# Pro!</a> #}
+            {# </div> #}
+
+        </ul>
+        <!-- End of Sidebar -->

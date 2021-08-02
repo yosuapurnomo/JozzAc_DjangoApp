@@ -1,0 +1,74 @@
+{% extends "admin/base_admin.html" %}
+
+{% block Content %}
+	<div class="container-fluid">
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Create Invoice For {{client.nama_Client}} </h1>
+        </div>
+        {% for message in messages %}
+        	<p>{{message}}</p>
+        {% endfor %}
+        <form method="POST" autocomplete="off">
+        	{% csrf_token %}
+				<div class="form-row">
+				    <div class="form-group col-md-6">
+				      <label for="id_Invoice">INVOICE</label>
+				      <input type="text" class="form-control" id="id_Invoice" name="Invoice" onchange="InvoiceNumber(this.value)">
+				    </div>
+				    <div class="form-group col-md-6">
+				      <label>Invoice Terakhir {{last_invoice.Invoice}}</label>
+				      
+				    </div>
+				</div>
+
+				<div class="form-group">
+					<input type="hidden" name="clientINV" value="{{client}}">
+					<label for="inputKeterangan">Keterangan</label>
+					{{form.Keterangan}}
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-2">
+						<label for="inputTotal">Total</label>
+						{{form.totalInvoice}}
+					</div>
+					<div class="form-group col-md-2">
+						<label for="id_statusPembayaran">Status Pembayaran</label>
+						<select id="id_statusPembayaran" class="form-control" name="statusPembayaran">
+					     
+					        <option value="BELUM">BELUM LUNAS</option>
+					        <option value="LUNAS">LUNAS</option>
+					    </select>
+					</div>
+				</div>
+				<p>{{form.errors}}</p>
+
+			  <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+	</div>
+{% endblock Content %}
+
+
+{% block javaScript %}
+	<script type="text/javascript">
+		function romanize(num) {
+		  var lookup = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},roman = '',i;
+		  for ( i in lookup ) {
+		    while ( num >= lookup[i] ) {
+		      roman += i;
+		      num -= lookup[i];
+		    }
+		  }
+		  return roman;
+		}
+
+		function InvoiceNumber(val) {
+			let date = new Date();
+			let d = date.getMonth();
+			let y = date.getFullYear();
+			let month = romanize(d+1);
+			let input = document.getElementById('id_Invoice').value;
+			document.getElementById('id_Invoice').value = `INV/${val}/${month}/${y}`
+		}
+	</script>
+{% endblock javaScript %}

@@ -1,0 +1,103 @@
+{% extends "admin/base_admin.html" %}
+{% load static %}
+
+
+{% block Content %}
+	<!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Tracking</h1>
+                    </div>
+
+                    <!-- Content Form -->
+                    <div class="container" style="margin-bottom:20px;">
+                        <div class="row">
+                        	{% for data in pesanan %}
+	                            <div class="col-sm-4">
+	                                <div class="card">
+	                                    <a href="#" data-toggle="modal" data-target="#Modal" onclick="Klik({{data.id}})" class="list-group-item list-group-item-action">
+	                                        <div class="card-body">
+	                                        	<p id="namaClient">Nama : {{data.clientINV.nama_Client}}</p>
+	                                            <p id="telpClient">Nomor Telp : {{data.clientINV.noTelp_Client}}</p>
+	                                            <p id="alamatClient">Alamat : {{data.clientINV.alamat_Client}} {{data.clientINV.kota_Client}}</p>
+	                                            <p id="payment">Pembayaran : {{data.get_statusPembayaran_display}}</p>
+	                                        </div>
+	                                    </a>
+	                                </div>
+	                            </div>
+                        	{% endfor %}
+                          
+                        </div>
+                    </div>
+
+                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- End of Main Content -->
+{% endblock Content %}
+
+{% block Modal %}
+	{% include "admin/include/modalTracking.html" %}
+{% endblock Modal %}
+
+{% block javaScript %}
+<script type="text/javascript">
+	// var  my_fileJs = {{my_list|safe}};
+	var loc = window.location
+	var wsStart = 'ws://';
+	if (loc.protocol == 'https:') {
+		wsStart = 'wss://'
+	}
+	
+	url = wsStart + loc.host + loc.pathname;
+
+	function Klik(value){
+		var socket = new WebSocket(url+value);
+
+		socket.onmessage = function(e){
+			console.log('message', e);
+			var kwitansi = JSON.parse(e.data)
+			console.log(kwitansi.kwitansi);
+			document.getElementById("kwitansi").innerHTML = kwitansi.kwitansi;
+
+			var ket = kwitansi.keterangan;
+
+			document.getElementById("ket").innerHTML = "Keterangan : "+ ket.replace(/\r?\n/g, '<br />');
+
+			var total = kwitansi.total;
+
+			document.getElementById("total").innerHTML = "Total : Rp." + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+			document.getElementById("nama").innerHTML = "Nama : " + kwitansi.nama;
+			document.getElementById("telp").innerHTML = "Nomor Telp : " + kwitansi.telp;
+			document.getElementById("alamat").innerHTML = "Alamat : " + kwitansi.alamat + " " + kwitansi.kota;
+			document.getElementById("paymentModal").innerHTML = "Pembayaran : " + kwitansi.payment;
+			if (kwitansi.approve) {
+				document.getElementById("approve").innerHTML = 'Sudah Approv'
+			}
+			else{
+
+			 document.getElementById("approve").innerHTML = 'Belum Approv'
+			}
+			document.getElementById("teknisi").innerHTML = 'Teknisi : ' + kwitansi.teknisi;
+			document.getElementById("spkProgress").innerHTML = "SPK : " + kwitansi.spkProgress;
+
+		};
+
+		socket.onopen = function(e){
+			console.log('open', e);
+		};
+
+		socket.onerror = function(e){
+			console.log('error', e);
+		};
+
+		socket.onclose = function(e){
+			console.log('close', e);
+		};
+	}
+
+
+</script>
+{% endblock javaScript %}

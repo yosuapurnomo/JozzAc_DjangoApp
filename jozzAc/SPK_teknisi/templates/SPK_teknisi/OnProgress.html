@@ -1,0 +1,29 @@
+{% extends "admin/base_admin.html" %}
+
+{% block Content %}
+	<div class="container-fluid pr-auto pl-2">
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+	        <h1 class="h3 mb-0 text-gray-800">Surat Perintah Kerja</h1>
+	    </div>
+
+	    <div class="row row-cols-1 row-cols-md-3 md-3 mb-3">
+		{% for data in object %}
+		<div class="col-sm-6 card-deck mb-3">
+			<div class="card" style="width: 30%;">
+			  <div class="card-body">
+			    <h5 class="card-title">{{data.no_SPK}}</h5>
+			    <h6 class="card-subtitle mb-2 text-muted">Teknisi : {{data.teknisi.username}} - ({{data.get_status_display}})</h6>
+			    <p class="card-text">{{data.keterangan|linebreaks}}Tanggal Kerja {{data.tgl_pengerjaan}}</p>
+			    <p class="card-text">{{data.pesanan.Invoice}}</p>
+			  </div>
+			    <div class="card-footer">
+				  {# <small class="text-muted">Last updated 3 mins ago</small> #}
+				    <a href="{% url "spk:update" slug=data.slug_SPK %}" class="card-link btn btn-primary">Detail</a>
+				    {# <a href="#" class="card-link">Another link</a> #}
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+		</div>
+    </div>
+{% endblock Content %}

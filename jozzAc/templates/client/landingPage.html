@@ -1,0 +1,33 @@
+{% extends "client/base.html" %}
+{% load static %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{% static "css/stylelanding.css" %}">
+{% endblock css %}
+
+{% block Content %}
+	<div class="container-fluid">
+                    <!-- <div class="media">
+                        <img class="align-self-start mr-3 imgtek" src="imageTeknisi.png" alt="Generic placeholder image">
+                        <div class="media-body">
+                          <h3 class="mt-5">Pemesanan Diproses</h3>
+                          <p>Pemesanan akan segera kami proses. Info lebih lanjut hubungi customer service kami.</p>
+                          <p>Terima Kasih</p>
+                        </div>
+                    </div> -->
+                    <div class="landig">
+                        <div class="row">
+                            <div class="col-sm">
+                                <img class="imgtek" src="{% static "imageTeknisi.png" %}" alt="Generic placeholder image">
+                            </div>
+                            <div class="col-sm">
+                                <div class="teks">
+                                  <h3 class="mt-5">Pemesanan Berhasil</h3>
+                                  <p>Pemesanan akan segera kami proses. Info lebih lanjut hubungi customer service kami.<br>
+                                  Terima Kasih...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock Content %}

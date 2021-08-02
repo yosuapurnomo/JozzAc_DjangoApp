@@ -1,0 +1,85 @@
+{% load static %}
+{% load humanize %}
+
+<html>
+ <head>
+   <title>{{object.Invoice}}</title>
+   {# <link rel="stylesheet" type="text/css" href="{% static "css/invoicePDF.css" %}"> #}
+   <style type="text/css">
+     @page{
+      size: letter portrait;
+      margin: 1cm 1cm;
+
+     }
+
+   </style>
+   
+ </head>
+ <body>
+  
+    <div style="position:inline;">
+     <img src="http://{{hostname}}/static/Logo_cv.png" style="width:100%; margin-left:10px;">
+     <h1>JozzAc Surabaya</h1>
+    </div>
+  
+
+  <table style="margin-bottom:20px; margin-top:10px;">
+    <tr>
+      <th style="display:flex; text-align:left; font-size:15px; width:30%;">
+            <h1>{{object.Invoice}}</h1>
+          </div>
+      </th>
+
+      <th style="text-align:right;">
+        <span style="font-size:15px;">
+          {{object.clientINV.nama_Client}}<br>
+          {{object.clientINV.email_Client}}<br>
+          {{object.clientINV.alamat_Client}} - {{object.clientINV.kota_Client}}
+        </span>
+      </th>
+    </tr>
+  </table> 
+
+   <table style="border: 1px solid black;">
+      <tr style="height: 30px; font-size:15px; text-align: center;">
+          <th>KETERANGAN</th>
+          <th >JUMLAH</th>
+      </tr>
+      <tr style=" height: 80px; font-size:14px;">
+        <td style="margin:10px; vertical-align: top; text-align: left;  padding-top: 5px;" class="keterangan">
+          {{object.Keterangan|linebreaks}}
+        </td>
+        <td style="width:30%; vertical-align: top; text-align: right; margin-right:20px; padding-top: 5px;">
+          Rp. {{object.totalInvoice|intcomma}}
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" style="height:30px; margin-left:5px;">
+        Terbilang : {{terbilang}}
+        </td>
+      </tr>
+  </table>
+        <p style="font-size:12px;">Untuk Pembayaran dapat melalui tunai atau transfer ke rekening berikut :</p>
+  <table>
+    <tr>
+      <th style="text-align:left; vertical-align:top;">
+        <pre style="font-size:13px;">Nama Bank            : BCA</pre>
+        <pre style="font-size:13px;">Nomor Rekening       : 1234567890</pre>
+        <pre style="font-size:13px;">A/n                  : JozzAc</pre>
+      </th>
+      <th style="vertical-align:top; width:30%;">
+        <h2>Hormat Kami,</h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h3>(JozzAc)</h3>
+      </th>
+    </tr>
+  </table>
+    
+
+ </body>
+</html>
