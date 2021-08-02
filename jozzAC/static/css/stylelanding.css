@@ -1,9 +1,0 @@
-.imgtek{
-    max-width: 500px;
-}
-
-@media only screen and (max-width:600px){
-    .imgtek{
-        max-width: 400px;
-    }
-}
