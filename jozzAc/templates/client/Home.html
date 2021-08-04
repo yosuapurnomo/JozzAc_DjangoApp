@@ -48,104 +48,21 @@
     <!-- akhir about -->
 
     <!-- Testimonial -->
-    <section class="testimonial testimony-section bg-ligth" style="height: 390px;" id="testimonial">
+    <section class="bg-ligth mt-4 container testi" id="testimonial">
         <h2 class="text-center">Testimonial</h2>
-        <div id="carouselExampleControls" class="row ftco-animate fadeInUp ftco-animated carousel slide" data-ride="carousel">
-            <div class="col-md-12">
-                <div class="carousel-testimony owl-carousel ftco-owl owl-loaded owl-drag">
-                    <div class="owl-stage-outer owl-height" style="height: 281.4px;">
-                        <div class="carousel-inner">
-                            <div class="carousel-item" style="width: 336.667px; margin-right: 30px;">
-                                <div class="item">
-                                    <div class="testimony-wrap py-4">
-                                        <img src="asset/Layout_2.jpg" alt="..." style="width: 336.667px;">
-                                        <div class="carousel-caption text d-none d-md-block">
-                                            <h5>Pertama</h5>
-                                            <p>ini yang pertama</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item active" style="width: 336.667px; margin-right: 30px;">
-                                <div class="item">
-                                    <div class="testimony-wrap py-4">
-                                        <img src="asset/Layout_2.jpg" alt="..." style="width: 336.667px;">
-                                        <div class="carousel-caption text d-none d-md-block">
-                                            <h5>Pertama</h5>
-                                            <p>ini yang pertama</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item active center" style="width: 336.667px; margin-right: 30px;">
-                                <div class="item">
-                                    <div class="testimony-wrap py-4">
-                                        <img src="asset/Layout_2.jpg" alt="..." style="width: 336.667px;">
-                                        <div class="carousel-caption text d-none d-md-block">
-                                            <h5>Pertama</h5>
-                                            <p>ini yang pertama</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item active center" style="width: 336.667px; margin-right: 30px;">
-                                <div class="item">
-                                    <div class="testimony-wrap py-4">
-                                        <img src="asset/Layout_2.jpg" alt="..." style="width: 336.667px;">
-                                        <div class="carousel-caption text d-none d-md-block">
-                                            <h5>Pertama</h5>
-                                            <p>ini yang pertama</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item active" style="width: 336.667px; margin-right: 30px;">
-                                <div class="item">
-                                    <div class="testimony-wrap py-4">
-                                        <img src="asset/Layout_2.jpg" alt="..." style="width: 336.667px;">
-                                        <div class="carousel-caption text d-none d-md-block">
-                                            <h5>Pertama</h5>
-                                            <p>ini yang pertama</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item" style="width: 336.667px; margin-right: 30px;">
-                                <div class="item">
-                                    <div class="testimony-wrap py-4">
-                                        <img src="asset/Layout_2.jpg" alt="..." style="width: 336.667px;">
-                                        <div class="carousel-caption text d-none d-md-block">
-                                            <h5>Pertama</h5>
-                                            <p>ini yang pertama</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item" style="width: 336.667px; margin-right: 30px;">
-                                <div class="item">
-                                    <div class="testimony-wrap py-4">
-                                        <img src="asset/Layout_2.jpg" alt="..." style="width: 336.667px;">
-                                        <div class="carousel-caption text d-none d-md-block">
-                                            <h5>Pertama</h5>
-                                            <p>ini yang pertama</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+        <div class="row row-cols-1 row-cols-md-3">
+        {% for x in eventContent %}
+            <div class="col mb-4">
+                <div class="card card_testi">
+                    <img class="card-img-top " src={{x.image.url}} alt="Card image cap" style="width: auto; min-height:200px; max-height:200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{x.nama_Content}}</h5>
+                        <p class="card-text">{{x.keterangan_Content|linebreaks}}</p>
                     </div>
                 </div>
             </div>
+        {% endfor %}
         </div>
-
     </section>
 
     <!-- Akhir Testimonial -->
@@ -227,7 +144,7 @@
                 <div class="row justify-content-center">
                     {% for product in object %}
                             <div class="mb-4">
-                            <div class="card border-warning mt-5 mr-2" style="max-width: 18rem;">
+                            <div class="card card_product border-warning mt-5 mr-2" style="max-width: 18rem;">
                                 <div class="card-header">{{product.namaProduct}}</div>
                                 <div class="card-body text-warning">
                                     <li>Keterangan :{{product.keteranganProduct|linebreaks}}</li>
@@ -297,6 +214,3 @@
     <!-- Akhir Footer -->
 </div>
 {% endblock Content %}
-
-
-

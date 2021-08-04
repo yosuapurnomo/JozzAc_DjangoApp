@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '4(jpj6^ae=_@t=b_z(^=*w971_n^meqb*d)6zwh5oek9e%q7z8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*', 'http://jozacsurabaya.com:8000/', '101.50.2.224:8000',
     'jozacsurabaya.com', 'jozacsurabaya']
@@ -137,10 +137,8 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = '/root/demo/www/public/static/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
-STATIC_ROOT = '/home/static/'
+# STATIC_ROOT = '/home/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 MEDIA_URL = '/media/'
