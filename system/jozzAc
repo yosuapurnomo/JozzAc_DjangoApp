@@ -1,6 +1,6 @@
 server {
-listen 8000;
-server_name jozacsurabaya.com;
+listen 80;
+server_name 101.50.2.224;
 
 location = /favicon.ico { access_log off; log_not_found off; }
 
