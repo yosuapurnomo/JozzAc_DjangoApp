@@ -26,8 +26,7 @@ SECRET_KEY = '4(jpj6^ae=_@t=b_z(^=*w971_n^meqb*d)6zwh5oek9e%q7z8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'http://jozacsurabaya.com:8000/', '101.50.2.224:8000',
-    'jozacsurabaya.com', 'jozacsurabaya']
+ALLOWED_HOSTS = ['jozzac', 'jozzac.com', 'www.jozzac.com']
 
 
 # Application definition
@@ -93,10 +92,21 @@ ASGI_APPLICATION = 'jozzAc.asgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'jozzacco_django',
+        'USER': 'jozzacco_root',
+        'PASSWORD': 'jozzac.123',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -142,4 +152,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_ROOT = '/home/jozzacco/public_html/media/'
+
+STATIC_ROOT = '/home/jozzacco/public_html/JozzAc/static/'
