@@ -153,7 +153,7 @@ class InvoiceDetail(LoginRequiredMixin, UpdateView):
 	slug_url_kwarg = 'slug'
 	slug_field = 'slug_Invoice'
 	extra_context = {
-	'last_invoice': model.objects.order_by('Invoice').last()
+	'last_invoice': model.objects.order_by('Invoice')
 	}
 
 class InvoiceDelete(LoginRequiredMixin, DeleteView):
