@@ -72,7 +72,8 @@ class create(LoginRequiredMixin, CreateView):
 
 	def get_context_data(self, **kwargs):
 	    context = super().get_context_data(**kwargs)
-	    context['lastPayment'] = self.model.objects.all().last()
+	    # context['lastPayment'] = self.model.objects.all().last()
+	    context['lastPayment'] = self.model.objects.all()
 	    context['invoice'] = InvoiceModel.objects.get(slug_Invoice=self.kwargs['slug'])
 	    return context
 
