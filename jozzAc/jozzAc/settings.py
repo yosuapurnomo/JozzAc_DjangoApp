@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '4(jpj6^ae=_@t=b_z(^=*w971_n^meqb*d)6zwh5oek9e%q7z8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['jozzac', 'jozzac.com', 'www.jozzac.com']
 
