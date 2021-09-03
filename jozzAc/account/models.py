@@ -26,6 +26,7 @@ class AccountManage(BaseUserManager):
 	def create_superuser(self, username, password, **extra_fields):
 		extra_fields.setdefault('is_superuser', True)
 		extra_fields.setdefault('is_admin', True)
+		extra_fields.setdefault('jabatan', "ADMIN")
 		# print(extra_fields)
 
 		if extra_fields.get('is_superuser') is not True:
