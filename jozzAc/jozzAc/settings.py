@@ -26,7 +26,7 @@ SECRET_KEY = '4(jpj6^ae=_@t=b_z(^=*w971_n^meqb*d)6zwh5oek9e%q7z8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*', 'jozzac', 'jozzac.com', 'www.jozzac.com', 'https://jozzac.com']
+ALLOWED_HOSTS = ['*', 'jozzac', 'jozzac.com', 'www.jozzac.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -61,6 +61,7 @@ AUTHENTICATION_BACKENDS = (
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -149,11 +150,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # STATIC_ROOT = '/home/static/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_ROOT = '/home/jozzacco/public_html/media/'
 
-STATIC_ROOT = '/home/jozzacco/JozzAc/jozzAc/static/'
+STATIC_ROOT = '/home/jozzacco/public_html/static/'
