@@ -38,8 +38,8 @@ class UpdatePayment(LoginRequiredMixin, UpdateView):
 	slug_field = 'slug_pembayaran'
 	slug_url_kwarg = 'slug'
 	extra_context = {
-	# 'lastPayment': model.objects.all().last()
-	'lastPayment': model.objects.all()
+	'lastPayment': model.objects.all().last()
+	# 'lastPayment': model.objects.all()
 	}
 
 class DeletePayment(LoginRequiredMixin, DeleteView):

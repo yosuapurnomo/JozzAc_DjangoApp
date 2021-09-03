@@ -42,8 +42,8 @@ class SPK_Update(LoginRequiredMixin, UpdateView):
 	slug_url_kwarg = 'slug'
 	slug_field = 'slug_SPK'
 	extra_context = {
-	# 'lastSPK': model.objects.all().last()
-	'lastSPK': model.objects.all()
+	'lastSPK': model.objects.all().last()
+	# 'lastSPK': model.objects.all()
 	}
 
 class SPK_Delete(LoginRequiredMixin, DeleteView):
