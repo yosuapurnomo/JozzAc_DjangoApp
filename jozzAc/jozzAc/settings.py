@@ -156,4 +156,4 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = '/home/jozzacco/public_html/media/'
 
-STATIC_ROOT = '/home/jozzacco/public_html/static/'
+STATIC_ROOT = '/home/jozzacco/JozzAc/jozzAc/static/'
