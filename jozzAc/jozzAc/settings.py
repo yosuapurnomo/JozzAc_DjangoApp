@@ -88,7 +88,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'jozzAc.wsgi.application'
-ASGI_APPLICATION = 'jozzAc.routing.application'
+ASGI_APPLICATION = 'jozzAc.asgi.application'
 
 CHANNEL_LAYERS = {
     "default": {
