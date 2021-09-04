@@ -88,15 +88,26 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'jozzAc.wsgi.application'
-ASGI_APPLICATION = 'jozzAc.asgi.application'
+ASGI_APPLICATION = 'jozzAc.routing.application'
 
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("jozzacco", 6379)],
+            # "hosts": [("jozzacco", 6379)],
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
         },
     },
+}
+
+CACHES = {
+    "default": {
+        "BACKEND" : "django_redis.cache.RedisCache",
+        "LOCATION" : [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        }
+    }
 }
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
