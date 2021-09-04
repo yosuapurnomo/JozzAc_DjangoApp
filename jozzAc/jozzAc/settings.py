@@ -90,6 +90,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'jozzAc.wsgi.application'
 ASGI_APPLICATION = 'jozzAc.asgi.application'
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("jozzacco", 6379)],
+        },
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
