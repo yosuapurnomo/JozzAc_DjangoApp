@@ -35,7 +35,7 @@
 				</div>
         		{{form.admin}}
 				<button type="submit" class="btn btn-primary ml-3">Sumbit</button>
-				<button type="button" class="btn btn-primary buttonSubmit" data-toggle="modal" data-target="#exampleModal">
+				<button type="button" class="btn btn-danger buttonSubmit" data-toggle="modal" data-target="#exampleModal">
 		          Delete
 		        </button>
 			</form>
@@ -61,7 +61,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <form method="post" action="{% url "eventContent:delete" slug=object.slug_Content%}">
         	{% csrf_token %}
-        	<button type="submit" class="btn btn-primary">Delete</button>
+        	<button type="submit" class="btn btn-danger">Delete</button>
         </form>
       </div>
     </div>
