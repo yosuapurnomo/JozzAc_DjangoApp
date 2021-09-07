@@ -22,7 +22,7 @@ urlpatterns = [
 ]
 
 application = ProtocolTypeRouter({
-	"http": get_default_application(),
+	"http": get_asgi_application(),
 	"websocket": AllowedHostsOriginValidator(
 		AuthMiddlewareStack(
 			URLRouter(
