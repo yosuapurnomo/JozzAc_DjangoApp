@@ -6,7 +6,7 @@ from django.urls import path, include, re_path
 from .views import dasboardList, dasboardAdmin, landingPage
 
 urlpatterns = [
-    re_path(r'^admin/', admin.site.urls),
+    # re_path(r'^admin/', admin.site.urls),
     path('admin/', dasboardAdmin.as_view(), name='dasboardAdmin'),
     path('admin/', include('account.urls', namespace='account')),
     path('', dasboardList.as_view(), name='dasboard'),
