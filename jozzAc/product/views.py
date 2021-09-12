@@ -30,7 +30,6 @@ class productDetail(LoginRequiredMixin, UpdateView):
 	slug_field = 'slugProduct'
 
 	def get(self, request, **kwargs):
-		print(kwargs['slug'])
 		return super().get(request, **kwargs)
 
 class productDelete(LoginRequiredMixin, DeleteView):

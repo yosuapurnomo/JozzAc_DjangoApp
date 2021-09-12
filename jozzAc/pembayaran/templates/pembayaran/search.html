@@ -10,7 +10,7 @@
 	    	<div class="form-group mx-sm-3 mb-2">
 			    <input type="text" list="spkPayment" class="form-control" id='input_payment' placeholder="No Kas Masuk" />
 				<datalist id="spkPayment">
-					{% for data in listPayment %}
+					{% for data in object %}
 						<option>{{data.no_pembayaran}}</option>
 					{% endfor %}
 				</datalist>
@@ -23,20 +23,8 @@
 	 		<h1 id="paymentInfo"></h1>
 	 	</div>
 
-	  	<div id='payment' style="display:none" class="ml-3">
-	  		<div class="card border-success mb-3" style="max-width: 18rem;">
-			  <div class="card-header bg-transparent border-success" id='no_pembayaran'></div>
-			  <div class="card-body text-dark">
-			    <h5 class="card-title" id='invoice'></h5>
-			    <p class="card-text" id='keterangan'></p>
-			    <p class="card-text" id='tgl_pembayaran'></p>
-			    <p class="card-text" id='jumlah'></p>
-			  </div>
-			  <div class="card-footer bg-transparent border-success">
-			  	<a class="btn btn-primary" id='link_Edit'>Detail</a>
-			  	<a class="btn btn-success" id='link_Cetak' target="_blank">Cetak</a>
-			  </div>
-			</div>	
+	  	<div id='payment' class="ml-3">
+	  		
 	 
 	    </div>
 
@@ -46,52 +34,20 @@
 
 {% block javaScript %}
 	<script type="text/javascript">
-		var loc = window.location
-		var wsStart = 'ws://';
-		if (loc.protocol == 'https:') {
-			wsStart = 'wss://'
-		}
-
-		var url = wsStart + loc.host + loc.pathname; 
-		function search (value) {
-			key = value.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'_')
-			var socket = new WebSocket(url+key);
-
-			socket.onmessage = function(e){
-				console.log('message', e);
-				let data = JSON.parse(e.data)
-				if (data.no_pembayaran !== false) {
-					let x = document.getElementById('payment')
-					let y = document.getElementById('paymentFalse')
-					if (x.style.display === 'none') {
-						x.style.display = 'block';
+		function search(value) {
+			$(document).ready(function(){
+				$.ajax({
+					url:"getView/",
+					dataType: 'json',
+					type: 'get',
+					data:{
+						button_text:value
+					},
+					success: function(response){
+						$('#payment').html(response.list_payment)
 					}
-					if (y.style.display === 'block') {
-						y.style.display = 'none';
-					}
-					var total = data.jumlah;
-					var ket = data.keterangan;
-					document.getElementById("no_pembayaran").innerHTML = data.no_pembayaran;
-					document.getElementById("tgl_pembayaran").innerHTML = "Tanggal Pembayaran : <br>" +  data.tgl_pembayaran;
-					document.getElementById("keterangan").innerHTML = "Keterangan : <br>" + ket.replace(/\r?\n/g, '<br />');
-					document.getElementById("invoice").innerHTML = "Invoice : " + data.invoice;
-					document.getElementById("jumlah").innerHTML = "Jumlah : Rp. " + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-					let link_Edit = document.getElementById("link_Edit").setAttribute('href', "{% url "pembayaran:update" slug='slug_pembayaran' %}".replace(/slug_pembayaran/, data.slug_pembayaran));
-					let link_Cetak = document.getElementById("link_Cetak").setAttribute('href', "{% url "pembayaran:cetak" slug='slug_pembayaran' %}".replace(/slug_pembayaran/, data.slug_pembayaran));
-				}
-				else {
-					let x = document.getElementById('payment')
-					let y = document.getElementById('paymentFalse')
-					if (x.style.display === 'block') {
-						x.style.display = 'none';
-					}
-					if (y.style.display === 'none') {
-						y.style.display = 'block';
-					}
-					document.getElementById("paymentInfo").innerHTML = "Pembayaran Tidak diTemukan";
-				}
-				
-			}
+				})
+			})
 		}
 
 	</script>

@@ -2,55 +2,66 @@
 {% load humanize %}
 
 <!-- Modal -->
-<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <!-- <h5 class="modal-title" id="exampleModalLabel">Tambah Data Dosen</h5> -->
-                <div class="modal-title" id="exampleModalLabel">
-                    <h6 id='nama'></h6>
-                    <h6 id='telp'></h6>
-                    <h6 id='alamat'></h6>
-                </div>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title" id='kwitansi'></h5>
-                        <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-                        <p class="card-text" id='ket'></p>
-                        <br>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm">
-                                    <h6 id='total'></h6>
-                                </div>
-                                <div class="col-sm">
-                                    <h6 id='teknisi'></h6>
-                                </div>
-                            </div>
-                        </div>
+<div class="modal-header">
+    <div class="modal-title" id="exampleModalLabel">
+        <h6 id='nama'>Nama : {{client.nama_Client}}</h6>
+        <h6 id='telp'>No Telp : {{client.noTelp_Client}}</h6>
+        <h6 id='alamat'>Alamat : {{client.alamat_Client}}</h6>
+    </div>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title" id='kwitansi'>Invoice : {{invoice.Invoice}}</h5>
+            <p class="card-text" id='ket'>{{invoice.Keterangan|linebreaks}}</p>
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6 id='total'>Jumlah : {{invoice.totalInvoice|intcomma}}</h6>
+                    </div>
+                    <div class="col-sm">
+                        <h6 id='teknisi'>
+                            {% if spk != False %}
+                                Teknisi : {{spk.teknisi.username}}
+                            {% else %}
+                                -
+                            {% endif %}
+                        
+                        </h6>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <div class="container">
-                    <div class="row">
-                        <h6 id='approve'></h6>
-                    </div>
-                    <div class="row" >
-                        <h6 id="paymentModal"></h6>
-                    </div>
-                    <div class="row" >
-                        <h6 id="spkProgress"></h6>
-                    </div>
-                </div>
-            </div>
-
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="container">
+        <div class="row">
+            <h6 id='approve'>
+                {% if approv != False %}
+                    {% if approv.approve == True %}
+                        Sudah Approve                        
+                    {% endif %}
+                {% else %}
+                    Belum Approve
+                {% endif %}
+            </h6>
+        </div>
+        <div class="row" >
+            <h6 id="paymentModal">{{invoice.get_statusPembayaran_display}}</h6>
+        </div>
+        <div class="row" >
+            <h6 id="spkProgress">
+                {% if spk != False %}
+                    {{spk.get_status_display}}
+                {% else %}
+                    Belum Ada SPK
+                {% endif %}
+            </h6>
         </div>
     </div>
 </div>

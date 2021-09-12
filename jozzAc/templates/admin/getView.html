@@ -1,0 +1,24 @@
+<div id='invoiceView'>
+	{% for inv in data %}
+		<div class="card border-success mb-3" style="max-width: 40%;">
+		  <div class="card-header bg-transparent border-success font-weight-bold" id='invoice'>{{inv.Invoice}}</div>
+		  <div class="card-body text-dark">
+		    <h5 class="card-title" id='clientINV'>{{inv.clientINV}}</h5>
+		    <p class="card-text" id='Keterangan'>{{inv.Keterangan}}</p>
+		    <p class="card-text" id='totalInvoice'>{{inv.totalInvoice}}</p>
+		    <p class="card-text" id='statusPembayaran'>{{inv.get_statusPembayaran_display}}</p>
+		  </div>
+		  <div class="card-footer bg-transparent border-success">
+		  	<a class="btn btn-primary" id='link_Edit' href="{% url "pesanan:invoiceUpdate" slug=inv.slug_Invoice%}">Detail</a>
+		  	<a class="btn btn-success" id='link_Cetak' target="_blank" href="{% url "pesanan:createPDF" slug=inv.slug_Invoice%}">Cetak</a>
+		  </div>
+		</div>
+	{% empty %}
+		<div id='invoiceFalse'>
+			<h1 id="invoiceInfo">
+				<h4>Invoice Tidak ditemukan</h4>
+			</h1>
+		</div>
+	{% endfor %}
+		
+</div>

@@ -1,0 +1,19 @@
+{% load humanize %}
+
+{% for i in payment %}
+    <div class="card border-success mb-3" style="max-width: 20rem;">
+	  <div class="card-header bg-transparent border-success" id='no_pembayaran'>{{i.no_pembayaran}}</div>
+	  <div class="card-body text-dark">
+	    <h5 class="card-title" id='invoice'>Invoice : {{i.invoice.Invoice}}</h5>
+	    <p class="card-text" id='keterangan'>{{i.keterangan|linebreaks}}</p>
+	    <p class="card-text" id='tgl_pembayaran'>Tanggal : {{i.tgl_pembayaran}}</p>
+	    <p class="card-text" id='jumlah'>Jumlah : Rp. {{i.jumlah|intcomma}}</p>
+	  </div>
+	  <div class="card-footer bg-transparent border-success">
+	  	<a class="btn btn-primary" id='link_Edit' href="{% url "pembayaran:update" slug=i.slug_pembayaran%}">Detail</a>
+	  	<a class="btn btn-success" id='link_Cetak' href="{% url "pembayaran:cetak" slug=i.slug_pembayaran%}" target="_blank">Cetak</a>
+	  </div>
+	</div>
+{% empty %}
+    Pembayaran Tidak Ditemukan
+{% endfor %}

@@ -1,8 +1,8 @@
-from django.shortcuts import redirect
-from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.http import HttpResponse, JsonResponse
 from datetime import datetime
+from django.template.loader import render_to_string, get_template
 
-from django.template.loader import get_template
 from xhtml2pdf import pisa
 import socket
 from terbilang import Terbilang
@@ -22,7 +22,6 @@ from django.db.models import Q, Count, Sum
 from .forms import InvoiceForm, JOForm
 from .forms import OrderFormSet
 from client.forms import clientForm
-# from account.forms import accountForm
 
 # Create your views here.
 class pesananKhusus(LoginRequiredMixin, CreateView):
@@ -332,3 +331,37 @@ class ClientOrder(CreateView):
 
     	return redirect(self.success_url)
 
+class AjaxGetView(View):
+	success_url = reverse_lazy('pesanan:invoiceView')
+	model = InvoiceModel
+	def get(self, request):
+		html_form = dict()
+		if self.request.is_ajax():
+			if self.request.GET.get('button_text') != "":
+				data = self.model.objects.filter(Invoice__contains=self.request.GET.get('button_text'))
+				html_form["list_Invoice"] = render_to_string("admin/getView.html", {"data":data})
+				return JsonResponse(html_form)
+
+		return redirect(self.success_url)
+
+class AjaxTrackingInvoice(View):
+	success_url = reverse_lazy('pesanan:tracking')
+	model = InvoiceModel
+
+	def get(self, request):
+		html_form = dict()
+		if self.request.is_ajax():
+			if self.request.GET.get('button_text') != "":
+				data = InvoiceModel.objects.get(id=self.request.GET.get('button_text'))
+				client = data.clientINV
+				approv = data.ApprovPesanan if hasattr(data, 'ApprovPesanan') else False
+				spk = data.SPK if hasattr(data, 'SPK') else False
+				if spk != False:
+					progress = spk.get_status_display()
+					teknisi = spk.teknisi.username
+				else: teknisi, progress = '-', 'Belum Ada SPK'
+				print(self.request.GET.get('button_text'))
+				html_form["infoData"] = render_to_string("admin/include/modalTracking.html", {"invoice":data, "client":client, "approv":approv, "spk":spk})
+				return JsonResponse(html_form)
+
+		return redirect(self.success_url)

@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
-from django.template.loader import get_template
+from django.http import HttpResponse, JsonResponse
+from django.template.loader import get_template, render_to_string
+
 from xhtml2pdf import pisa
 from django.db.models import Q, Count, Sum
 import socket
@@ -75,10 +76,12 @@ class SPK_Progress_List(LoginRequiredMixin, ListView):
 	context_object_name = 'object'
 	queryset = model.objects.filter(status='PENDING')
 
-class searchSPK(LoginRequiredMixin, TemplateView):
+class searchSPK(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('account:login')
 	template_name = 'SPK_teknisi/searchSPK.html'
-	extra_context = {'listSpk': SPKModel.objects.order_by('tgl_input')}
+	model = SPKModel
+	context_object_name = 'object'
+	queryset = model.objects.order_by('tgl_input')
 
 class list_SPK_teknisi(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('account:login')
@@ -167,3 +170,17 @@ class cetakReport(LoginRequiredMixin, View):
 		if pisa_status.err:
 			return HttpResponse('We had some errors <pre>' + html + '</pre>')
 		return response
+
+class getSPKView(View):
+	success_url = reverse_lazy('spk:listSPK')
+	model = SPKModel
+
+	def get(self, request):
+		html_form = dict()
+		if self.request.is_ajax():
+			if self.request.GET.get('button_text') != "":
+				data = self.model.objects.filter(no_SPK__contains=self.request.GET.get('button_text'))
+				html_form["list_spk"] = render_to_string("SPK_teknisi/listSPK_View.html", {"spk":data})
+				return JsonResponse(html_form)
+
+		return redirect(self.success_url)

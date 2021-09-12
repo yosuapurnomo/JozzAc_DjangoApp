@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from terbilang import Terbilang
-from django.template.loader import get_template
+from django.template.loader import get_template, render_to_string
+
 from xhtml2pdf import pisa
 import socket
 from django.contrib import messages
@@ -14,10 +15,12 @@ from .forms import pembayaranForm
 from pesanan.models import InvoiceModel
 
 # Create your views here.
-class searchPayment(LoginRequiredMixin, TemplateView):
+class searchPayment(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('account:login')
 	template_name = 'pembayaran/search.html'
-	extra_context = {'listPayment': pembayaranModel.objects.order_by('tgl_input')}
+	model = pembayaranModel
+	context_object_name = "object"
+	queryset = pembayaranModel.objects.order_by('tgl_input')
 
 class ListPayment(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('account:login')
@@ -126,3 +129,16 @@ class createPDF(LoginRequiredMixin, View):
 		if pisa_status.err:
 			return HttpResponse('We had some errors <pre>' + html + '</pre>')
 		return response
+
+class getPaymentView(View):
+	success_url = reverse_lazy('spk:listSPK')
+	model = pembayaranModel
+	def get(self, request):
+		html_form = dict()
+		if self.request.is_ajax():
+			if self.request.GET.get('button_text') != "":
+				data = self.model.objects.filter(no_pembayaran__contains=self.request.GET.get('button_text'))
+				html_form["list_payment"] = render_to_string("pembayaran/listPayment_View.html", {"payment":data})
+				return JsonResponse(html_form)
+
+		return redirect(self.success_url)
