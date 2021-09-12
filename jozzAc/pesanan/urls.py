@@ -3,7 +3,8 @@ from .views import (pesananKhusus,
 					Tracking, ClientOrder,
 					ApprovalView, InvoiceView,
 					InvoiceApprov, InvoiceDetail,
-					InvoiceDelete, cetakInvoice, cetakReportPendapatan, cetakReportPiutang, requestReport)
+					InvoiceDelete, cetakInvoice, cetakReportPendapatan, cetakReportPiutang, requestReport,
+					 AjaxGetView, AjaxTrackingInvoice)
 
 app_name = 'pesanan'
 
@@ -21,6 +22,8 @@ urlpatterns = [
 	path('admin/pendapatan/cetak/', cetakReportPendapatan.as_view(), name='ReportPendapatan'),
 	path('admin/piutang/cetak/', cetakReportPiutang.as_view(), name='ReportPiutang'),
 	path('admin/request/cetak/', requestReport.as_view(), name='ReportRequest'),
+	path('admin/invoice/view/getView/', AjaxGetView.as_view()),
+	path('admin/tracking/getView/', AjaxTrackingInvoice.as_view()),
 
 	# Client
 	path('add/', ClientOrder.as_view(), name='AddOrder'),

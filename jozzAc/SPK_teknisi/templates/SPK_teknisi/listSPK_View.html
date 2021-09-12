@@ -1,0 +1,20 @@
+{% for i in spk %}
+    <div class="card border-success mb-3 ml-3" style="max-width: 30%;">
+	  <div class="card-header bg-transparent border-success" id='no_SPK'>{{i.no_SPK}}</div>
+	  <div class="card-body text-dark">
+	    <h5 class="card-title" id='keterangan'>{{i.keterangan|linebreaks}}</h5>
+	    <p class="card-text" id='tgl_input'>{{i.tgl_pengerjaan}}</p>
+	    <p class="card-text" id='status'>{{i.get_status_display}}</p>
+	  </div>
+	  <div class="card-footer bg-transparent border-success">
+	  	<a class="btn btn-primary" id='link_Edit' href="{% url "spk:update" slug=i.slug_SPK%}">Detail</a>
+	  	<a class="btn btn-success" id='link_Cetak' href="{% url "spk:cetakPDF" slug=i.slug_SPK%}" target="_blank">Cetak</a>
+	  </div>
+	</div>
+{% empty %}
+    <div id='SPKFalse'>
+			<h1 id="SPKInfo">
+				<h4>SPK Tidak ditemukan</h4>
+			</h1>
+		</div>
+{% endfor %}

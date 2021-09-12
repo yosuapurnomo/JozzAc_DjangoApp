@@ -1,13 +1,12 @@
 from django.conf import settings
 from django.conf.urls.static import static
-# from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 from django.urls import path, include, re_path
 
 from .views import dasboardList, dasboardAdmin, landingPage
 
 urlpatterns = [
-    # re_path(r'^admin/', admin.site.urls),
+    re_path(r'^admin/', admin.site.urls),
     path('admin/', dasboardAdmin.as_view(), name='dasboardAdmin'),
     path('admin/', include('account.urls', namespace='account')),
     path('', dasboardList.as_view(), name='dasboard'),

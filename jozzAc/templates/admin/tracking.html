@@ -13,21 +13,25 @@
 
                     <!-- Content Form -->
                     <div class="container" style="margin-bottom:20px;">
-                        <div class="row">
-                        	{% for data in pesanan %}
-	                            <div class="col-sm-4">
-	                                <div class="card">
-	                                    <a href="#" data-toggle="modal" data-target="#Modal" onclick="Klik({{data.id}})" class="list-group-item list-group-item-action">
-	                                        <div class="card-body">
+                        <div class="row row-cols-1 row-cols-md-3">
+                        	{# <div class="card-deck"> #}
+                        		{% for data in pesanan %}
+		                            <div class="col mb-2">
+		                                <div class="card h-100">
+		                                    <div class="card-body">
 	                                        	<p id="namaClient">Nama : {{data.clientINV.nama_Client}}</p>
 	                                            <p id="telpClient">Nomor Telp : {{data.clientINV.noTelp_Client}}</p>
 	                                            <p id="alamatClient">Alamat : {{data.clientINV.alamat_Client}} {{data.clientINV.kota_Client}}</p>
 	                                            <p id="payment">Pembayaran : {{data.get_statusPembayaran_display}}</p>
-	                                        </div>
-	                                    </a>
-	                                </div>
-	                            </div>
-                        	{% endfor %}
+		                                    </div>
+		                                    <div class="card-footer">
+										      <button class="btn btn-primary" onclick="getData({{data.id}})">Detail</button>
+										    </div>
+		                                </div>
+		                            </div>
+	                        	{% endfor %}
+                        	{# </div> #}
+                        	
                           
                         </div>
                     </div>
@@ -39,65 +43,36 @@
 {% endblock Content %}
 
 {% block Modal %}
-	{% include "admin/include/modalTracking.html" %}
+	<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+           
+        </div>
+    </div>
+</div>
 {% endblock Modal %}
 
 {% block javaScript %}
 <script type="text/javascript">
-	// var  my_fileJs = {{my_list|safe}};
-	var loc = window.location
-	var wsStart = 'ws://';
-	if (loc.protocol == 'https:') {
-		wsStart = 'wss://'
+	function getData(id){
+		$(document).ready(function(){
+				$.ajax({
+					url:"getView/",
+					dataType: 'json',
+					type: 'get',
+					data:{
+						button_text:id
+					},
+					beforeSend: function () {
+				        $("#Modal").modal("show");
+				      },
+					success: function(response){
+						$("#Modal .modal-content").html(response.infoData);
+					},
+
+				})
+			})
 	}
-	
-	url = wsStart + loc.host + loc.pathname;
-
-	function Klik(value){
-		var socket = new WebSocket(url+value);
-
-		socket.onmessage = function(e){
-			console.log('message', e);
-			var kwitansi = JSON.parse(e.data)
-			console.log(kwitansi.kwitansi);
-			document.getElementById("kwitansi").innerHTML = kwitansi.kwitansi;
-
-			var ket = kwitansi.keterangan;
-
-			document.getElementById("ket").innerHTML = "Keterangan : "+ ket.replace(/\r?\n/g, '<br />');
-
-			var total = kwitansi.total;
-
-			document.getElementById("total").innerHTML = "Total : Rp." + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-			document.getElementById("nama").innerHTML = "Nama : " + kwitansi.nama;
-			document.getElementById("telp").innerHTML = "Nomor Telp : " + kwitansi.telp;
-			document.getElementById("alamat").innerHTML = "Alamat : " + kwitansi.alamat + " " + kwitansi.kota;
-			document.getElementById("paymentModal").innerHTML = "Pembayaran : " + kwitansi.payment;
-			if (kwitansi.approve) {
-				document.getElementById("approve").innerHTML = 'Sudah Approv'
-			}
-			else{
-
-			 document.getElementById("approve").innerHTML = 'Belum Approv'
-			}
-			document.getElementById("teknisi").innerHTML = 'Teknisi : ' + kwitansi.teknisi;
-			document.getElementById("spkProgress").innerHTML = "SPK : " + kwitansi.spkProgress;
-
-		};
-
-		socket.onopen = function(e){
-			console.log('open', e);
-		};
-
-		socket.onerror = function(e){
-			console.log('error', e);
-		};
-
-		socket.onclose = function(e){
-			console.log('close', e);
-		};
-	}
-
-
 </script>
 {% endblock javaScript %}
