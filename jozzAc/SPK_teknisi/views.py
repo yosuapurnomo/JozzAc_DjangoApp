@@ -74,7 +74,9 @@ class SPK_Progress_List(LoginRequiredMixin, ListView):
 	model = SPKModel
 	template_name = 'SPk_teknisi/OnProgress.html'
 	context_object_name = 'object'
-	queryset = model.objects.filter(status='PENDING')
+	if model.objects.filter(status='PENDING') != None:
+		queryset = model.objects.filter(status='PENDING')
+	else:queryset = None
 
 class searchSPK(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('account:login')
