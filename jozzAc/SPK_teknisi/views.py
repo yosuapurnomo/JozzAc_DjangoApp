@@ -67,7 +67,7 @@ class SPK_InvoiceView(LoginRequiredMixin, ListView):
 	model = InvoiceModel
 	template_name = 'SPk_teknisi/SPK_Invoice_View.html'
 	context_object_name = 'object'
-	queryset = model.objects.filter(SPK__isnull=False)
+	queryset = model.objects.filter(SPK__isnull=True)
 
 class SPK_Progress_List(LoginRequiredMixin, ListView):
 	login_url = reverse_lazy('account:login')
